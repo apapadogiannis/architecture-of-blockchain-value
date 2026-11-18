@@ -27,6 +27,11 @@
     },
     {
       "relation": "isSupplementTo",
+      "identifier": "https://ssrn.com/abstract=6196338",
+      "scheme": "url"
+    },
+    {
+      "relation": "isSupplementTo",
       "identifier": "https://github.com/apapadogiannis/architecture-of-blockchain-value",
       "scheme": "url"
     }
