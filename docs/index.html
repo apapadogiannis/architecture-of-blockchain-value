@@ -81,6 +81,7 @@
   .terms dt { font: italic 17px/1.4 Georgia, "Times New Roman", serif; white-space: nowrap; }
   .terms dd { margin: 0; color: var(--text-secondary); }
   .terms dd b { color: var(--text-primary); font-weight: 600; }
+  .terms.kinds dt { font: 600 15px/1.5 system-ui, sans-serif; display: flex; align-items: center; gap: 8px; }
   .terms .cap { grid-column: 1 / -1; font: 600 13px system-ui, sans-serif; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
   @media (max-width: 560px) { .terms { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 8px; } }
   .read { color: var(--text-secondary); font-size: 14.5px; margin: 10px 0 0; max-width: 75ch; }
@@ -99,9 +100,20 @@
   </div>
 </header>
 
+<section class="card" id="kinds">
+  <h2>Three kinds of blockchain</h2>
+  <p class="lede">The paper sorts blockchains by what they can deliver. A <i>capability</i> is a distinct type of service that a blockchain reliably provides, such as transferring value or running smart contracts. The three kinds below are the three curves in the first chart.</p>
+  <dl class="terms kinds">
+    <dt><i class="key" style="border-top-color: var(--series-1); border-top-style: dashed"></i>Single-capability</dt><dd><b>One narrowly defined service.</b> The capability set has a single element, typically peer-to-peer value transfer. Examples in the paper: Bitcoin, Litecoin, Monero.</dd>
+    <dt><i class="key" style="border-top-color: var(--series-2)"></i>Multi-capability</dt><dd><b>Several services inside one programmable environment.</b> Smart contracts let payments, tokens, lending and other applications run side by side and call one another. The set is larger but bounded. Examples in the paper: Ethereum, Solana, Cardano.</dd>
+    <dt><i class="key" style="border-top-color: var(--series-3)"></i>Meta-capability</dt><dd><b>An open-ended market of services.</b> The network hosts whole sub-networks (subnets, parachains, zones), each able to define new services, and lets them interoperate. Examples in the paper: Bittensor, Polkadot, Cosmos, Avalanche.</dd>
+  </dl>
+  <p class="read">In the model the kinds differ in two ways: how many capabilities they have (<i>K</i>), and how strongly those capabilities reinforce one another (<i>η</i>). A single-capability chain has <i>K</i> = 1 and nothing to combine. The paper assumes a meta-capability chain has at least as many capabilities, and at least as much complementarity, as a multi-capability one.</p>
+</section>
+
 <section class="card" id="cap">
   <h2>1. More capabilities, and how strongly they reinforce one another</h2>
-  <p class="lede">A blockchain delivers <i>K</i> capabilities (services). Each one is worth the same on its own, and every pair adds a bonus of size <i>η</i> because the two can be used together. Value then grows with the number of pairs, which is why it curves upward.</p>
+  <p class="lede">A blockchain delivers <i>K</i> capabilities. In this benchmark each one is worth the same on its own, and every pair adds a bonus of size <i>η</i> because the two can be used together. Value then grows with the number of pairs, which is why it curves upward.</p>
   <div class="eq"><i>V</i> = <i>φ</i> <i>u</i> <i>N</i>(<i>u</i>) · [ <i>K</i> + <i>η</i> · <i>K</i>(<i>K</i> − 1) / 2 ]</div>
   <p class="eqnote">Equation (14) of the paper.</p>
   <dl class="terms">
@@ -114,8 +126,10 @@
     <dt>K</dt><dd><b>Number of capabilities.</b> How many distinct services the blockchain delivers. A single-capability network has <i>K</i> = 1, for example value transfer only.</dd>
     <dt>η</dt><dd><b>Complementarity.</b> The extra value created when two capabilities are used together, as a fraction of one capability's value. With <i>η</i> = 0 the capabilities do not interact; with <i>η</i> = 0.5 every pair adds half a capability's worth.</dd>
     <dt>K(K − 1) / 2</dt><dd><b>Number of pairs.</b> How many different pairs can be formed from <i>K</i> capabilities: 1 pair for 2 capabilities, 45 for 10, 1,225 for 50.</dd>
+    <dt>η multi, η meta</dt><dd><b>The complementarity of each kind of chain.</b> The sliders below set <i>η</i> separately for a multi-capability and a meta-capability chain. The paper's illustration uses 0.5 and 0.75.</dd>
     <dt>[ … ]</dt><dd><b>The bracket.</b> The first term, <i>K</i>, counts the capabilities themselves. The second, <i>η K</i>(<i>K</i> − 1)/2, counts the bonus from all pairs. <b>The chart plots this bracket</b>, that is, value with <i>φ</i> = <i>u</i> = <i>N</i> = 1, so that only the effect of capabilities and complementarity is visible.</dd>
   </dl>
+  <p class="note" style="margin-top:-4px"><b>A simplification to keep in mind.</b> This benchmark gives every capability the same value and the same users, and every pair the same <i>η</i>. Real capabilities differ widely, and the paper says so: its general formula, Equation (7), lets each capability have its own value, adoption and network effect and each pair its own <i>η</i>, and it notes that a narrower system can dominate if its adoption or per-unit value is materially higher. The curves here show the direction of the effect under equal conditions. They are not a ranking of actual networks.</p>
   <div class="controls">
     <div class="control"><label for="K"><span>Capabilities <i>K</i></span> <output id="Kout"></output></label><input id="K" type="range" min="1" max="50" step="1" value="50"></div>
     <div class="control"><label for="etaMulti"><span>Multi-capability <i>η</i></span> <output id="etaMultiOut"></output></label><input id="etaMulti" type="range" min="0" max="1" step="0.05" value="0.5"></div>
