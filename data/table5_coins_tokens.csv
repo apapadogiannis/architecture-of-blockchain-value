@@ -1,0 +1,4 @@
+Paradigm,Native coin,Tokens,Examples
+Single-capability,"Yes: Secures base protocol, used for payments",Absent: no higher-layer token standards,"Bitcoin (BTC), Litecoin (LTC), Monero (XMR)"
+Multi-capability,"Yes: pays gas fees, anchors consensus and scarcity","Yes: Issued via smart contracts (ERC-20, ERC-721, etc.) for DeFi, governance, NFTs","Ethereum (ETH + USDC, UNI), Solana (SOL + SRM)"
+Meta-capability,Yes: Secures base layer and coordinates cross-service activity,Yes: Service- or subnet-specific tokens within ecosystem,"Polkadot (DOT + parachain tokens), Cosmos (ATOM + zone tokens), Bittensor (TAO + subnet credits)"

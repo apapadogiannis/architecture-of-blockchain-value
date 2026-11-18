@@ -1,0 +1,4 @@
+Paradigm,Examples,Dominant scaling law,Architectural mechanism
+Single-capability,"Bitcoin, Litecoin, Monero",Metcalfe (quadratic) with Sarnoff elements,Peer-to-peer payments; each user enlarges the transaction web; liquidity and connectivity deepen with user base
+Multi-capability,"Ethereum, Solana, Cardano",Metcalfe → Reed,"Smart contracts and composability (DeFi, non-fungible tokens (NFTs), Layer-2 protocols (L2s)) create subgroup effects and developer–user feedback loops; EIP-1559 ties usage to token scarcity via fee burns"
+Meta-capability,"Bittensor (TAO), Polkadot, Cosmos, Avalanche",Reed (exponential),Coalition-forming design; subnets/parachains/zones enable interoperable clusters and subgroup dynamics by construction

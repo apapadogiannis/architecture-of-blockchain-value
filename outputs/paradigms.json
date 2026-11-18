@@ -1,0 +1,107 @@
+{
+  "pillars": [
+    "purpose",
+    "consensus",
+    "incentives",
+    "tokenomics",
+    "network_effects"
+  ],
+  "paradigms": {
+    "Single-capability": {
+      "purpose": {
+        "examples": "Bitcoin, Litecoin, Monero, Zcash",
+        "core_purpose": "Peer-to-peer value transfer",
+        "architectural_focus": "Proof-of-work, fixed supply, transparency, reliability in one service",
+        "source": "Table 2"
+      },
+      "consensus": {
+        "examples": "Bitcoin, Litecoin, Monero, Zcash",
+        "dominant_mechanisms": "Proof-of-work (PoW)",
+        "consensus_characteristics": "Security through computational effort; strong censorship resistance; limited throughput; high energy cost",
+        "source": "Table 3"
+      },
+      "incentives": {
+        "examples": "Bitcoin, Litecoin, Monero",
+        "primary_incentives": "Block rewards; transaction fees",
+        "economic_principle": "Scarce block space priced by fees. Issuance dominates early, fees later",
+        "source": "Table 4"
+      },
+      "tokenomics": {
+        "native_coin": "Yes: Secures base protocol, used for payments",
+        "tokens": "Absent: no higher-layer token standards",
+        "examples": "Bitcoin (BTC), Litecoin (LTC), Monero (XMR)",
+        "source": "Table 5"
+      },
+      "network_effects": {
+        "examples": "Bitcoin, Litecoin, Monero",
+        "dominant_scaling_law": "Metcalfe (quadratic) with Sarnoff elements",
+        "architectural_mechanism": "Peer-to-peer payments; each user enlarges the transaction web; liquidity and connectivity deepen with user base",
+        "source": "Table 6"
+      }
+    },
+    "Multi-capability": {
+      "purpose": {
+        "examples": "Ethereum, Solana, Cardano",
+        "core_purpose": "Programmability of applications and finance",
+        "architectural_focus": "Smart contracts, composability, dApps, stablecoins, tokenized assets",
+        "source": "Table 2"
+      },
+      "consensus": {
+        "examples": "Ethereum, Solana, Cardano, Algorand",
+        "dominant_mechanisms": "Proof-of-stake (PoS); proof-of-history (PoH, Solana); proof-of-authority (PoA)",
+        "consensus_characteristics": "Consensus integrates block creation with resource pricing and contract execution; optimizes scalability, efficiency, and diversity of applications",
+        "source": "Table 3"
+      },
+      "incentives": {
+        "examples": "Ethereum, Solana, Cardano",
+        "primary_incentives": "Inherits: block rewards, transaction fees → generalized as gas; Extends: Staking rewards; role-specific fees (oracles, relayers)",
+        "economic_principle": "Gas fees scale with resource use and demand. Incentives balance diverse actors while preventing congestion",
+        "source": "Table 4"
+      },
+      "tokenomics": {
+        "native_coin": "Yes: pays gas fees, anchors consensus and scarcity",
+        "tokens": "Yes: Issued via smart contracts (ERC-20, ERC-721, etc.) for DeFi, governance, NFTs",
+        "examples": "Ethereum (ETH + USDC, UNI), Solana (SOL + SRM)",
+        "source": "Table 5"
+      },
+      "network_effects": {
+        "examples": "Ethereum, Solana, Cardano",
+        "dominant_scaling_law": "Metcalfe → Reed",
+        "architectural_mechanism": "Smart contracts and composability (DeFi, non-fungible tokens (NFTs), Layer-2 protocols (L2s)) create subgroup effects and developer–user feedback loops; EIP-1559 ties usage to token scarcity via fee burns",
+        "source": "Table 6"
+      }
+    },
+    "Meta-capability": {
+      "purpose": {
+        "examples": "Bittensor, Polkadot, Cosmos, Avalanche",
+        "core_purpose": "Coordination of heterogeneous services",
+        "architectural_focus": "Interoperability, service markets, subnets/parachains, proof-of-intelligence (Bittensor)",
+        "source": "Table 2"
+      },
+      "consensus": {
+        "examples": "Bittensor, Polkadot, Cosmos, Internet computer, Avalanche",
+        "dominant_mechanisms": "Base-layer PoS or PoA; task-specific consensus (e.g., proof-of-intelligence in Bittensor)",
+        "consensus_characteristics": "Layered design: Global ledger secured by PoS or PoA; specialised markets apply domain-specific validation; balances general security with task-level logic",
+        "source": "Table 3"
+      },
+      "incentives": {
+        "examples": "Bittensor, Polkadot, Cosmos, ICP, Avalanche",
+        "primary_incentives": "Inherits: block rewards, gas, staking; Extends: Task-specific rewards in service markets",
+        "economic_principle": "Market-level fees reward verifiable outputs. Requires alignment between base-layer security and market-level incentives",
+        "source": "Table 4"
+      },
+      "tokenomics": {
+        "native_coin": "Yes: Secures base layer and coordinates cross-service activity",
+        "tokens": "Yes: Service- or subnet-specific tokens within ecosystem",
+        "examples": "Polkadot (DOT + parachain tokens), Cosmos (ATOM + zone tokens), Bittensor (TAO + subnet credits)",
+        "source": "Table 5"
+      },
+      "network_effects": {
+        "examples": "Bittensor (TAO), Polkadot, Cosmos, Avalanche",
+        "dominant_scaling_law": "Reed (exponential)",
+        "architectural_mechanism": "Coalition-forming design; subnets/parachains/zones enable interoperable clusters and subgroup dynamics by construction",
+        "source": "Table 6"
+      }
+    }
+  }
+}

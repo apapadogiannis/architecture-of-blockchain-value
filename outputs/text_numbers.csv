@@ -1,0 +1,27 @@
+quantity,where,value
+footnote2_interaction_contribution,Footnote 2,30.0000
+footnote2_total_value,Footnote 2,230.0000
+eq7_general_multi_K2,Equation (7),75.0000
+eq14_closed_form_multi_K2,Equation (14),75.0000
+eq7_general_multi_K10,Equation (7),975.0000
+eq14_closed_form_multi_K10,Equation (14),975.0000
+eq7_general_multi_K50,Equation (7),19875.0000
+eq14_closed_form_multi_K50,Equation (14),19875.0000
+eq7_general_meta_K2,Equation (7),82.5000
+eq14_closed_form_meta_K2,Equation (14),82.5000
+eq7_general_meta_K10,Equation (7),1312.5000
+eq14_closed_form_meta_K10,Equation (14),1312.5000
+eq7_general_meta_K50,Equation (7),29062.5000
+eq14_closed_form_meta_K50,Equation (14),29062.5000
+fig5_V_single,"Figure 5, Equation (15)",1.0000
+fig5_V_multi_K50,"Figure 5, Equation (18)",662.5000
+fig5_V_meta_K50,"Figure 5, Equation (19)",968.7500
+fig5_share_from_complementarity_multi_K50,Equation (14),0.924528
+fig5_share_from_complementarity_meta_K50,Equation (14),0.948387
+benchmark1_V_K50_eta0,"Equations (12), (13)",50.0000
+corollary_ratio_meta_to_multi_K50_lambda1,Corollary,1.462264
+corollary_ratio_meta_to_multi_K1000_lambda1,Corollary,1.498006
+corollary_ratio_meta_to_multi_K100000_lambda1,Corollary,1.499980
+corollary_ratio_meta_to_multi_K100000_lambda2,Corollary,5.999870
+corollary_limit_lambda1,Corollary,1.500000
+corollary_limit_lambda2,Corollary,6.000000

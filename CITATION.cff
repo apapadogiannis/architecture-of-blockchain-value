@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this paper or package, please cite it as below."
+title: "The architecture of blockchain value: capabilities, pillars, and growth dynamics"
+authors:
+  - family-names: Papadogiannis
+    given-names: Agisilaos
+    orcid: "https://orcid.org/0009-0002-7753-7052"
+date-released: 2026-11-18
+version: "0.1"
+license: MIT
+repository-code: "https://github.com/apapadogiannis/architecture-of-blockchain-value"
+preferred-citation:
+  type: article
+  title: "The architecture of blockchain value: capabilities, pillars, and growth dynamics"
+  authors:
+    - family-names: Papadogiannis
+      given-names: Agisilaos
+  journal: "Frontiers in Blockchain"
+  volume: 9
+  start: 1747512
+  year: 2026
+  doi: "10.3389/fbloc.2026.1747512"

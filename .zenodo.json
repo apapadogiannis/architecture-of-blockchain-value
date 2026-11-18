@@ -1,0 +1,34 @@
+{
+  "title": "The architecture of blockchain value: model code, figures and interactive demo",
+  "upload_type": "software",
+  "description": "Model code, figures and an interactive demo for the paper published in Frontiers in Blockchain 9:1747512 (2026). The paper classifies blockchains into single-, multi- and meta-capability paradigms, describes five architectural pillars (purpose, consensus, incentives, tokenomics, network effects) and proposes a stylized valuation model in which network value depends on adoption, per-unit service value and pairwise complementarities between capabilities. Includes the model as a Python module, the scripts that draw Figures 5 and 8, the numbers stated in Section 3, the paradigm tables in machine-readable form and a single-page interactive demo.",
+  "creators": [
+    {
+      "name": "Papadogiannis, Agisilaos",
+      "orcid": "0009-0002-7753-7052"
+    }
+  ],
+  "keywords": [
+    "blockchain",
+    "capabilities",
+    "network effects",
+    "Metcalfe's law",
+    "Reed's law",
+    "tokenomics",
+    "valuation",
+    "composability"
+  ],
+  "license": "MIT",
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "10.3389/fbloc.2026.1747512",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/apapadogiannis/architecture-of-blockchain-value",
+      "scheme": "url"
+    }
+  ]
+}

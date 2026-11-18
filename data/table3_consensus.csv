@@ -1,0 +1,4 @@
+Paradigm,Examples,Dominant mechanisms,Consensus characteristics
+Single-capability,"Bitcoin, Litecoin, Monero, Zcash",Proof-of-work (PoW),Security through computational effort; strong censorship resistance; limited throughput; high energy cost
+Multi-capability,"Ethereum, Solana, Cardano, Algorand","Proof-of-stake (PoS); proof-of-history (PoH, Solana); proof-of-authority (PoA)","Consensus integrates block creation with resource pricing and contract execution; optimizes scalability, efficiency, and diversity of applications"
+Meta-capability,"Bittensor, Polkadot, Cosmos, Internet computer, Avalanche","Base-layer PoS or PoA; task-specific consensus (e.g., proof-of-intelligence in Bittensor)",Layered design: Global ledger secured by PoS or PoA; specialised markets apply domain-specific validation; balances general security with task-level logic

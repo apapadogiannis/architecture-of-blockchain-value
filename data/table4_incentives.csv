@@ -1,0 +1,4 @@
+Paradigm,Examples,Primary incentives,Economic principle
+Single-capability,"Bitcoin, Litecoin, Monero",Block rewards; transaction fees,"Scarce block space priced by fees. Issuance dominates early, fees later"
+Multi-capability,"Ethereum, Solana, Cardano","Inherits: block rewards, transaction fees → generalized as gas; Extends: Staking rewards; role-specific fees (oracles, relayers)",Gas fees scale with resource use and demand. Incentives balance diverse actors while preventing congestion
+Meta-capability,"Bittensor, Polkadot, Cosmos, ICP, Avalanche","Inherits: block rewards, gas, staking; Extends: Task-specific rewards in service markets",Market-level fees reward verifiable outputs. Requires alignment between base-layer security and market-level incentives

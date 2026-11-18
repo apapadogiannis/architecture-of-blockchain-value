@@ -1,0 +1,4 @@
+Paradigm,Examples,Core purpose,Architectural focus
+Single-capability,"Bitcoin, Litecoin, Monero, Zcash",Peer-to-peer value transfer,"Proof-of-work, fixed supply, transparency, reliability in one service"
+Multi-capability,"Ethereum, Solana, Cardano",Programmability of applications and finance,"Smart contracts, composability, dApps, stablecoins, tokenized assets"
+Meta-capability,"Bittensor, Polkadot, Cosmos, Avalanche",Coordination of heterogeneous services,"Interoperability, service markets, subnets/parachains, proof-of-intelligence (Bittensor)"
