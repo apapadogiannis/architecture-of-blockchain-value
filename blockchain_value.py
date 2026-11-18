@@ -129,35 +129,35 @@ def complementarity_share(K: int, eta: float) -> float:
 
 # ---------------------------------------------------------------------------------------------
 # Beyond the published figures. The article's figures use the symmetric benchmark, in which every
-# capability is worth the same. The two functions below apply Equation (7), as published, to
-# capabilities of unequal value. The shape of the inequality and the normalization are choices made
-# here for illustration; they are not in the article.
+# capability is worth the same. The functions below apply Equation (7), as published, to capabilities
+# of unequal value while holding their total stand-alone value fixed, so that the only thing that
+# changes is the bonus from pairs. The way the total is split is a choice made here for illustration.
 
-def ranked_capabilities(K: int, s: float) -> list:
-    """K capabilities whose stand-alone values fall with rank: the k-th is worth k**(-s).
+def split_values(K: int, top_share: float) -> list:
+    """Stand-alone values of K capabilities that add up to K, when the largest holds top_share of the total.
 
-    s = 0 gives equal values (the article's benchmark). s = 1 makes the second capability worth half
-    of the first and the tenth worth a tenth. Full adoption, u = 1 and N = 1, as in Figure 5.
+    The other K - 1 capabilities share the rest equally. A top_share at or below 1 / K gives equal
+    values of 1 each, the article's benchmark.
     """
     if K < 1:
         raise ValueError("K must be at least 1")
-    if s < 0:
-        raise ValueError("s must be non-negative")
-    return [Capability(f"c{k}", phi=float(k) ** (-s)) for k in range(1, K + 1)]
+    if not 0 <= top_share < 1 and K > 1:
+        raise ValueError("top_share must be at least 0 and below 1")
+    if K == 1:
+        return [1.0]
+    p = max(top_share, 1.0 / K)
+    return [p * K] + [(1.0 - p) * K / (K - 1)] * (K - 1)
 
 
-def unequal_value(K: int, eta: float, s: float) -> float:
-    """Equation (7) for K capabilities of unequal value, with one complementarity eta for every pair.
+def unequal_value(K: int, eta: float, top_share: float) -> float:
+    """Equation (7) for K capabilities with the same total stand-alone value as in the benchmark, split unequally.
 
-    Values are those of ranked_capabilities(K, s). The normalization V0 is the value of the largest
-    capability (here 1), so that s = 0 reproduces Equation (14) exactly. Other normalizations change
-    the level of the result. In closed form, with S1 = sum of values and S2 = sum of squared values,
-    V = S1 + eta (S1**2 - S2) / 2.
+    Values are split_values(K, top_share), one complementarity eta applies to every pair, and the
+    normalization V0 is the average capability value (which is the article's V0 = phi u N when all
+    capabilities are equal). The direct term is K whatever the split. The pair term is
+    eta K**2 (1 - H) / 2, where H is the sum of squared value shares: it is largest when the values
+    are equal (H = 1 / K, Equation 14) and falls to zero as one capability takes all the value.
     """
-    return network_value(ranked_capabilities(K, s), u=1.0, eta=eta, V0=1.0)
-
-
-def effective_capabilities(K: int, s: float) -> float:
-    """Effective number of capabilities, S1**2 / S2: K when values are equal, near 1 when one dominates."""
-    v = [float(k) ** (-s) for k in range(1, K + 1)]
-    return sum(v) ** 2 / sum(x * x for x in v)
+    values = split_values(K, top_share)
+    caps = [Capability(f"c{i}", phi=v) for i, v in enumerate(values)]
+    return network_value(caps, u=1.0, eta=eta, V0=sum(values) / K)

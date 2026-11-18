@@ -9,8 +9,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const html = readFileSync(join(root, "docs/index.html"), "utf8");
 const block = html.match(/\/\/ MODEL-BEGIN[\s\S]*?\/\/ MODEL-END/);
 if (!block) { console.error("model block not found in docs/index.html"); process.exit(1); }
-const { benchmarkValue, complementarityShare, scalingLaw, unequalValue, effectiveCapabilities } =
-  new Function(block[0] + "\nreturn { benchmarkValue, complementarityShare, scalingLaw, unequalValue, effectiveCapabilities };")();
+const { benchmarkValue, complementarityShare, scalingLaw, unequalValue, splitValues } =
+  new Function(block[0] + "\nreturn { benchmarkValue, complementarityShare, scalingLaw, unequalValue, splitValues };")();
 
 const csv = name => readFileSync(join(root, "outputs", name), "utf8").trim().split("\n").slice(1);
 const close = (a, b) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
@@ -30,11 +30,12 @@ for (const line of csv("fig8_scaling_laws.csv")) {
   expect(`reed u=${u}`, scalingLaw("reed", u), r);
 }
 for (const line of csv("ext_unequal_values.csv")) {
-  const [s, K, eff, multi, meta] = line.split(",").map(Number);
-  expect(`effective capabilities s=${s} K=${K}`, Number(effectiveCapabilities(K, s).toFixed(6)), eff);
-  expect(`unequal multi s=${s} K=${K}`, Number(unequalValue(K, 0.5, s).toFixed(6)), multi);
-  expect(`unequal meta s=${s} K=${K}`, Number(unequalValue(K, 0.75, s).toFixed(6)), meta);
-  if (s === 0) expect(`s=0 is Equation (14), K=${K}`, unequalValue(K, 0.75, 0), benchmarkValue(K, 0.75));
+  const [K, share, direct, bonus, V, bonusEq] = line.split(",").map(Number);
+  const v = unequalValue(K, 0.75, share);
+  expect(`unequal V K=${K} share=${share}`, v, V);
+  expect(`unequal bonus K=${K} share=${share}`, v - K, bonus);
+  expect(`equal bonus K=${K}`, benchmarkValue(K, 0.75) - K, bonusEq);
+  expect(`split adds up K=${K} share=${share}`, splitValues(K, share).reduce((a, b) => a + b, 0), direct);
 }
 const text = Object.fromEntries(csv("text_numbers.csv").map(l => { const p = l.split(","); return [p[0], Number(p[p.length - 1])]; }));
 const round6 = x => Number(x.toFixed(6));

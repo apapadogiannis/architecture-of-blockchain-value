@@ -33,14 +33,15 @@ machine-readable form, and a small interactive page.
 number of users and watch Equation (14) and the three scaling laws respond. With the default
 settings its first chart is Figure 5. Open the file in a browser, or use the link above.
 
-One control goes beyond the published figures. Figure 5 uses the symmetric benchmark, in which every
-capability is worth the same. The control "How unequal are the capabilities?" applies the paper's
-general formula, Equation (7), to capabilities whose values fall with rank. With equal values 50
-capabilities and *η* = 0.75 are worth 968.75 units of one capability; if the *k*-th capability is
-worth 1/*k* of the largest, they are worth about 11.5, because most pairs then join two small
-capabilities. The paper states the condition in words (Section 3.3: the dominance results rely on
-symmetric benchmark assumptions). The way values fall with rank and the normalization by the largest
-capability are illustrative choices of this package, not results of the paper.
+One panel goes beyond the published figures. Figure 5 uses the symmetric benchmark, in which every
+capability is worth the same. Panel 2 of the demo keeps the total stand-alone value fixed and splits
+it unequally, using the paper's general formula, Equation (7). The stand-alone term does not change;
+the bonus from pairs shrinks, because the bonus of a pair is proportional to the product of the two
+values and a product is largest when they are equal. With 10 capabilities and *η* = 0.75 the network
+is worth 43.75 with an equal split, 37.08 when one capability holds half of the value and 17.08 when
+it holds 90%. The paper states the condition in words (Section 3.3: the dominance results rely on
+symmetric benchmark assumptions). Splitting the value as one large capability and equal others is an
+illustrative choice of this package, not a result of the paper.
 
 ## Using the model
 
@@ -48,7 +49,7 @@ capability are illustrative choices of this package, not results of the paper.
 from blockchain_value import benchmark_value, unequal_value, network_value, Capability, scaling_law
 
 benchmark_value(K=50, eta=0.75)        # Equation (14), normalized: 968.75
-unequal_value(K=50, eta=0.75, s=1.0)   # Equation (7), unequal values (not in the paper): 11.48
+unequal_value(K=10, eta=0.75, top_share=0.5)   # Equation (7), same total split unequally (not in the paper): 37.08
 scaling_law("reed", 10)                # 2**10 = 1024.0
 
 # Equation (7) in general form: capabilities that differ in value, adoption and network effect
@@ -89,7 +90,7 @@ Each takes `python3 -I <script>.py DATA_DIR OUT_DIR`.
 | `text_numbers.py` | The worked example of footnote 2; Equation (14) checked against the general sum of Equation (7); the limiting ratio of the Corollary; `text_numbers.csv` | Section 3 |
 | `taxonomy.py` | The three paradigms described along the five pillars; `paradigms.json` | Tables 2 to 6 |
 | `fig5_capability_scaling.py` | Normalized value against the number of capabilities, *K* = 1 to 50, *η* = 0.5 and 0.75 (stylized values); `fig5_capability_scaling.csv` | Figure 5, Equations (15), (18), (19) |
-| `ext_unequal_values.py` | Equation (7) with capabilities of unequal value (the *k*-th worth *k*^−*s* of the largest, *s* = 0, 0.5, 1); `ext_unequal_values.csv` | Not in the paper: the table behind the demo's "how unequal" control (see below) |
+| `ext_unequal_values.py` | Equation (7) with the same total value split unequally among 2 to 20 capabilities; `ext_unequal_values.csv` | Not in the paper: the table behind panel 2 of the demo (see above) |
 | `fig8_scaling_laws.py` | Sarnoff, Metcalfe and Reed scaling for 1 to 20 users; `fig8_scaling_laws.csv` | Figure 8 |
 
 Figures 1 to 4, 6 and 7 are diagrams without numerical content and are not redrawn here; they are in the paper.

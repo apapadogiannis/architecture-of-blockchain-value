@@ -57,6 +57,7 @@
   .key { display: inline-block; width: 16px; height: 0; border-top: 2px solid; flex: none; }
   .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--text-secondary); margin-bottom: 4px; }
   .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; flex: none; }
   .chart { position: relative; }
   .chart svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
   .chart text { fill: var(--text-muted); font: 12px system-ui, sans-serif; }
@@ -84,6 +85,9 @@
   .terms.kinds dt { font: 600 15px/1.5 system-ui, sans-serif; display: flex; align-items: center; gap: 8px; }
   .terms .cap { grid-column: 1 / -1; font: 600 13px system-ui, sans-serif; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
   @media (max-width: 560px) { .terms { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 8px; } }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; }
+  .split figure { margin: 0; min-width: 0; } .split figcaption { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 6px; }
+  @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
   .read { color: var(--text-secondary); font-size: 14.5px; margin: 10px 0 0; max-width: 75ch; }
   footer { margin-top: 28px; font-size: 13.5px; color: var(--text-secondary); }
   footer p { margin: 0 0 8px; max-width: 80ch; }
@@ -121,7 +125,7 @@
     <dt>V</dt><dd><b>Network value.</b> The total economic value of the blockchain: the sum of what its capabilities are worth, alone and in combination.</dd>
     <dt>φ</dt><dd><b>Value per unit.</b> What one user's use of one capability is worth. It sums up price, quality and scarcity in a single number, in currency or as an index.</dd>
     <dt>u</dt><dd><b>User base.</b> The number of users of the network. This benchmark assumes full adoption: every user uses every capability.</dd>
-    <dt>N(u)</dt><dd><b>Network-effect multiplier.</b> How much more useful a capability becomes as its user base grows. It is a pure number: 1 means no network effect. Panel 2 shows three forms it can take.</dd>
+    <dt>N(u)</dt><dd><b>Network-effect multiplier.</b> How much more useful a capability becomes as its user base grows. It is a pure number: 1 means no network effect. Panel 3 shows three forms it can take.</dd>
     <dt>φ u N(u)</dt><dd><b>Value of one capability on its own.</b> Per-unit value, times users, times the network effect. Everything in the bracket is counted in units of this.</dd>
     <dt>K</dt><dd><b>Number of capabilities.</b> How many distinct services the blockchain delivers. A single-capability network has <i>K</i> = 1, for example value transfer only.</dd>
     <dt>η</dt><dd><b>Complementarity.</b> The extra value created when two capabilities are used together, as a fraction of one capability's value. With <i>η</i> = 0 the capabilities do not interact; with <i>η</i> = 0.5 every pair adds half a capability's worth.</dd>
@@ -129,15 +133,13 @@
     <dt>η multi, η meta</dt><dd><b>The complementarity of each kind of chain.</b> The sliders below set <i>η</i> separately for a multi-capability and a meta-capability chain. The paper's illustration uses 0.5 and 0.75.</dd>
     <dt>[ … ]</dt><dd><b>The bracket.</b> The first term, <i>K</i>, counts the capabilities themselves. The second, <i>η K</i>(<i>K</i> − 1)/2, counts the bonus from all pairs. <b>The chart plots this bracket</b>, that is, value with <i>φ</i> = <i>u</i> = <i>N</i> = 1, so that only the effect of capabilities and complementarity is visible.</dd>
   </dl>
-  <p class="note" style="margin-top:-4px"><b>A simplification to keep in mind.</b> This benchmark gives every capability the same value and the same users, and every pair the same <i>η</i>. Real capabilities differ widely, and the paper says so: its general formula, Equation (7), lets each capability have its own value, adoption and network effect and each pair its own <i>η</i>, and it notes that a narrower system can dominate if its adoption or per-unit value is materially higher. Use the last slider below to see what happens when capabilities are not equal. The curves are not a ranking of actual networks.</p>
+  <p class="note" style="margin-top:-4px"><b>A simplification to keep in mind.</b> This benchmark gives every capability the same value. Panel 2 shows what changes when they are not equal. The curves are not a ranking of actual networks.</p>
   <div class="controls">
     <div class="control"><label for="K"><span>Capabilities <i>K</i></span> <output id="Kout"></output></label><input id="K" type="range" min="1" max="50" step="1" value="50"></div>
     <div class="control"><label for="etaMulti"><span>Multi-capability <i>η</i></span> <output id="etaMultiOut"></output></label><input id="etaMulti" type="range" min="0" max="1" step="0.05" value="0.5"></div>
     <div class="control"><label for="etaMeta"><span>Meta-capability <i>η</i></span> <output id="etaMetaOut"></output></label><input id="etaMeta" type="range" min="0" max="1" step="0.05" value="0.75"></div>
-    <div class="control"><label for="skew"><span>How unequal are the capabilities?</span> <output id="skewOut"></output></label><input id="skew" type="range" min="0" max="1.5" step="0.1" value="0"></div>
     <div class="control"><button id="reset" type="button">Reset to the paper's values</button></div>
   </div>
-  <div class="note" id="skewNote" hidden><b>Beyond the published figures.</b> <span id="skewText"></span> The values are computed with the paper's general formula, Equation (7), using one <i>η</i> for every pair. Two choices here are this page's, not the paper's: the way values fall with rank, and measuring the pair bonus against the largest capability. Other choices would change the level of the curves, but not the lesson: pairs of small capabilities add little.</div>
   <p class="note" id="capNote" hidden></p>
   <div class="tiles" id="capTiles"></div>
   <div class="legend" id="capLegend"></div>
@@ -146,8 +148,32 @@
   <details><summary>Show the values as a table</summary><div class="tablewrap"><table id="capTable"></table></div></details>
 </section>
 
+<section class="card" id="uneq">
+  <h2>2. What if the capabilities are not equally valuable?</h2>
+  <p class="lede">Then the network is worth less, and the reason is the bonus from pairs. The bonus that two capabilities create together is proportional to the <b>product</b> of their values, and a product is largest when the two are equal.</p>
+  <dl class="terms">
+    <div class="cap">Two capabilities, 2 units of value in total</div>
+    <dt>1 + 1</dt><dd>Bonus = <i>η</i> × 1 × 1 = <b><i>η</i> × 1.00</b>. Equal split: the largest possible bonus.</dd>
+    <dt>1.5 + 0.5</dt><dd>Bonus = <i>η</i> × 1.5 × 0.5 = <b><i>η</i> × 0.75</b>.</dd>
+    <dt>1.9 + 0.1</dt><dd>Bonus = <i>η</i> × 1.9 × 0.1 = <b><i>η</i> × 0.19</b>. The total is still 2, but there is little to combine with.</dd>
+  </dl>
+  <p class="read" style="margin:0 0 16px">The sliders below do the same with more capabilities. The total stand-alone value is kept fixed, so the only thing that can change is the bonus from pairs.</p>
+  <div class="controls">
+    <div class="control"><label for="topShare"><span>Share of value held by the largest capability</span> <output id="topShareOut"></output></label><input id="topShare" type="range" min="0" max="1" step="0.02" value="0"></div>
+    <div class="control"><label for="K2"><span>Capabilities <i>K</i></span> <output id="K2out"></output></label><input id="K2" type="range" min="2" max="20" step="1" value="10"></div>
+  </div>
+  <div class="tiles" id="uneqTiles"></div>
+  <div class="legend" id="uneqLegend"></div>
+  <div class="split">
+    <figure><figcaption>How the value is split among the capabilities</figcaption><div class="chart" id="splitChart"></div></figure>
+    <figure><figcaption>What the network is worth</figcaption><div class="chart" id="worthChart"></div></figure>
+  </div>
+  <p class="read" id="uneqRead"></p>
+  <p class="eqnote" style="margin:12px 0 0; padding:0"><b>Beyond the published figures.</b> The paper's figures use equal values. This panel applies the paper's general formula, Equation (7), with <i>η</i> = 0.75 for every pair and the bonus measured against the average capability value. Splitting the value as "one large capability, the rest equal" is this page's choice for illustration. With an equal split the result is exactly Equation (14).</p>
+</section>
+
 <section class="card" id="net">
-  <h2>2. How value grows with the number of users</h2>
+  <h2>3. How value grows with the number of users</h2>
   <p class="lede">In the equation of panel 1, the part <i>u</i> <i>N</i>(<i>u</i>) depends on how users connect. Three classical laws give three very different curves. The paper associates single-capability networks mainly with Metcalfe, multi-capability networks with a move from Metcalfe toward Reed, and meta-capability networks with Reed.</p>
   <div class="eq"><i>V</i>(<i>u</i>) = <i>u</i> <i>N</i>(<i>u</i>)</div>
   <p class="eqnote">One capability (<i>K</i> = 1) with <i>φ</i> = 1, so that only the effect of users is visible.</p>
@@ -194,20 +220,19 @@ function complementarityShare(K, eta) {
   const pairs = eta * K * (K - 1) / 2;
   return pairs / (K + pairs);
 }
-// Beyond the published figures: Equation (7) when the k-th capability is worth k^(-s) of the largest,
-// one eta for every pair, V0 = value of the largest capability. s = 0 is Equation (14).
-function rankedSums(K, s) {
+// Beyond the published figures: Equation (7) with the same total stand-alone value (K units), split so
+// that the largest capability holds topShare and the others share the rest equally; one eta for every
+// pair; V0 = average capability value. An equal split is Equation (14).
+function splitValues(K, topShare) {
+  if (K === 1) return [1];
+  const p = Math.max(topShare, 1 / K);
+  return [p * K].concat(Array(K - 1).fill((1 - p) * K / (K - 1)));
+}
+function unequalValue(K, eta, topShare) {
+  const v = splitValues(K, topShare);
   let s1 = 0, s2 = 0;
-  for (let k = 1; k <= K; k++) { const v = Math.pow(k, -s); s1 += v; s2 += v * v; }
-  return [s1, s2];
-}
-function unequalValue(K, eta, s) {
-  const [s1, s2] = rankedSums(K, s);
-  return s1 + eta * (s1 * s1 - s2) / 2;
-}
-function effectiveCapabilities(K, s) {
-  const [s1, s2] = rankedSums(K, s);
-  return s1 * s1 / s2;
+  for (const x of v) { s1 += x; s2 += x * x; }
+  return s1 + eta * (s1 * s1 - s2) / (2 * (s1 / K));
 }
 // Section 8, Figure 8: Sarnoff V = u, Metcalfe V = u^2, Reed V = 2^u
 function scalingLaw(law, u) {
@@ -341,7 +366,8 @@ function legend(host, series) {
 function tiles(host, items) {
   host.replaceChildren(...items.map(t => {
     const d = h("div", "tile"), k = h("div", "k");
-    if (t.color) { const key = h("i", "key"); key.style.borderTopColor = t.color; if (t.dash) key.style.borderTopStyle = "dashed"; k.append(key); }
+    if (t.color && t.bar) { const sw = h("i", "sw"); sw.style.background = t.color; k.append(sw); }
+    else if (t.color) { const key = h("i", "key"); key.style.borderTopColor = t.color; if (t.dash) key.style.borderTopStyle = "dashed"; k.append(key); }
     k.append(document.createTextNode(t.k));
     d.append(k, h("div", "v", t.v), h("div", "s", t.s || " ")); return d;
   }));
@@ -356,44 +382,97 @@ function table(host, head, rows) {
 const C = n => `var(--series-${n})`;
 
 function drawCapabilities() {
-  const K = +$("K").value, eMulti = +$("etaMulti").value, eMeta = +$("etaMeta").value, sk = +$("skew").value;
-  const val = (k, eta) => sk === 0 ? benchmarkValue(k, eta) : unequalValue(k, eta, sk);
-  const share = (k, eta) => { const direct = val(k, 0), total = val(k, eta); return total > 0 ? (total - direct) / total : 0; };
-  $("skewOut").textContent = sk === 0 ? "equal (the paper)" : sk <= 0.5 ? "mildly unequal" : sk <= 1 ? "unequal" : "very unequal";
-  $("skewNote").hidden = sk === 0;
-  if (sk > 0) $("skewText").textContent = `Capabilities are now ranked by value: the 2nd is worth ${Math.round(Math.pow(2, -sk) * 100)}% of the largest and the 10th is worth ${Math.round(Math.pow(10, -sk) * 100)}%.`;
+  const K = +$("K").value, eMulti = +$("etaMulti").value, eMeta = +$("etaMeta").value;
   $("Kout").textContent = K; $("etaMultiOut").textContent = eMulti.toFixed(2); $("etaMetaOut").textContent = eMeta.toFixed(2);
   const Ks = Array.from({ length: 50 }, (_, i) => i + 1);
   const series = [
     { name: "Single-capability (K = 1)", short: "Single", color: C(1), dash: "6 5", at: () => benchmarkValue(1, 0) },
-    { name: `Multi-capability (η = ${eMulti.toFixed(2)})`, short: "Multi", color: C(2), at: k => val(k, eMulti) },
-    { name: `Meta-capability (η = ${eMeta.toFixed(2)})`, short: "Meta", color: C(3), at: k => val(k, eMeta) },
+    { name: `Multi-capability (η = ${eMulti.toFixed(2)})`, short: "Multi", color: C(2), at: k => benchmarkValue(k, eMulti) },
+    { name: `Meta-capability (η = ${eMeta.toFixed(2)})`, short: "Meta", color: C(3), at: k => benchmarkValue(k, eMeta) },
   ];
   series.forEach(s => s.points = Ks.map(k => [k, s.at(k)]));
-  const vS = 1, vMu = val(K, eMulti), vMe = val(K, eMeta);
+  const vS = 1, vMu = benchmarkValue(K, eMulti), vMe = benchmarkValue(K, eMeta);
   const note = $("capNote");
   note.hidden = eMeta >= eMulti;
   note.textContent = "The paper assumes that meta-capability networks have at least as much complementarity as multi-capability ones (η meta ≥ η multi). With the current settings that assumption is reversed, so the ranking reverses too.";
   tiles($("capTiles"), [
     { k: "Single", color: C(1), dash: true, v: fmt(vS), s: "one capability, no pairs" },
-    { k: "Multi at K = " + K, color: C(2), v: fmt(vMu), s: Math.round(share(K, eMulti) * 100) + "% from pairs" + (sk > 0 ? ", " + fmt(benchmarkValue(K, eMulti)) + " if equal" : "") },
-    { k: "Meta at K = " + K, color: C(3), v: fmt(vMe), s: Math.round(share(K, eMeta) * 100) + "% from pairs" + (sk > 0 ? ", " + fmt(benchmarkValue(K, eMeta)) + " if equal" : "") },
-    { k: "Meta ÷ Multi", v: (vMe / vMu).toFixed(2) + "×", s: sk > 0 ? "at this K" : eMulti > 0 ? "tends to " + (eMeta / eMulti).toFixed(2) + "× as K grows" : "grows without bound as K grows" },
-  ].concat(sk > 0 ? [{ k: "Effective capabilities", v: effectiveCapabilities(K, sk).toFixed(1), s: "equal-sized equivalents of the " + K }] : []));
+    { k: "Multi at K = " + K, color: C(2), v: fmt(vMu), s: Math.round(complementarityShare(K, eMulti) * 100) + "% from pairs" },
+    { k: "Meta at K = " + K, color: C(3), v: fmt(vMe), s: Math.round(complementarityShare(K, eMeta) * 100) + "% from pairs" },
+    { k: "Meta ÷ Multi", v: (vMe / vMu).toFixed(2) + "×", s: eMulti > 0 ? "tends to " + (eMeta / eMulti).toFixed(2) + "× as K grows" : "grows without bound as K grows" },
+  ]);
   legend($("capLegend"), series);
   lineChart($("capChart"), { series, xDomain: [1, 50], xTicks: [1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50], marker: K,
-    xLabel: "Number of capabilities K", yLabel: sk > 0 ? "Value, in units of the largest capability" : "Normalized value V", xName: "K", label: "Normalized value against the number of capabilities, for the three paradigms" });
+    xLabel: "Number of capabilities K", yLabel: "Normalized value V", xName: "K", label: "Normalized value against the number of capabilities, for the three paradigms" });
   const pairs = K * (K - 1) / 2;
-  if (sk > 0) {
-    const eq = benchmarkValue(K, eMeta);
-    $("capRead").textContent = `With ${K} capabilit${K === 1 ? "y" : "ies"} of unequal value, a meta-capability network is worth ${fmt(vMe)}, against ${fmt(eq)} if all were equal` +
-      (K > 1 ? `, that is ${Math.round(vMe / eq * 100)}% of the benchmark. ` : ". ") +
-      `In this formula they behave like about ${effectiveCapabilities(K, sk).toFixed(1)} equal capabilities, each worth ${Math.round(rankedSums(K, sk)[1] / rankedSums(K, sk)[0] * 100)}% of the largest. Adding capabilities still adds value, but most of the new pairs join two small capabilities and add little.`;
-  } else
   $("capRead").textContent = `With ${K} capabilit${K === 1 ? "y" : "ies"} there ${pairs === 1 ? "is 1 pair" : "are " + fmt(pairs) + " pairs"}. ` +
     `A meta-capability network is worth ${K} from its capabilities plus ${eMeta.toFixed(2)} × ${fmt(pairs)} = ${fmt(eMeta * pairs)} from the pairs, ${fmt(vMe)} in all. ` +
     (eMeta === 0.75 && eMulti === 0.5 ? "These are the paper's values, so the chart is Figure 5." : "The paper's Figure 5 uses η = 0.50 and η = 0.75.");
-  table($("capTable"), ["K", "Single", "Multi", "Meta"], Ks.map(k => [k, fmt(1), fmt(val(k, eMulti)), fmt(val(k, eMeta))]));
+  table($("capTable"), ["K", "Single", "Multi", "Meta"], Ks.map(k => [k, fmt(1), fmt(benchmarkValue(k, eMulti)), fmt(benchmarkValue(k, eMeta))]));
+}
+
+const ETA2 = 0.75;
+function drawUnequal() {
+  const K = +$("K2").value, t = +$("topShare").value, p = 1 / K + t * (0.95 - 1 / K);
+  const values = splitValues(K, p), total = unequalValue(K, ETA2, p), equal = benchmarkValue(K, ETA2);
+  const bonus = total - K, bonusEq = equal - K, kept = bonus / bonusEq;
+  $("K2out").textContent = K;
+  $("topShareOut").textContent = Math.round(p * 100) + "%" + (t === 0 ? " (equal)" : "");
+  tiles($("uneqTiles"), [
+    { k: "Stand-alone value", color: C(1), bar: true, v: fmt(K), s: "the same for any split" },
+    { k: "Bonus from pairs", color: C(2), bar: true, v: fmt(bonus), s: t === 0 ? "the most it can be" : fmt(bonusEq) + " if equal" },
+    { k: "Network value", v: fmt(total), s: t === 0 ? "Equation (14)" : fmt(equal) + " if equal" },
+    { k: "Bonus kept", v: Math.round(kept * 100) + "%", s: "of the equal-split bonus" },
+  ]);
+  const lg = [["Stand-alone value of the capabilities", C(1)], ["Bonus from pairs", C(2)]];
+  $("uneqLegend").replaceChildren(...lg.map(([name, color]) => { const sp = h("span"), sw = h("i", "sw"); sw.style.background = color; sp.append(sw, document.createTextNode(name)); return sp; }));
+
+  // left: one bar per capability
+  const hostA = $("splitChart"); hostA.querySelector("svg")?.remove();
+  const W = Math.max(280, Math.round(hostA.clientWidth || 420)), H = 220, m = { l: 34, r: 8, t: 20, b: 30 };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b, yMax = Math.max(values[0], 1) * 1.08;
+  const a = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Stand-alone value of each capability" });
+  const Y = v => m.t + ph - v / yMax * ph, slot = pw / K, bw = Math.max(3, Math.min(34, slot - 2));
+  for (const tk of niceTicks(yMax, 4)) if (tk <= yMax) {
+    a.append(el("line", { x1: m.l, x2: m.l + pw, y1: Y(tk), y2: Y(tk), stroke: "var(--grid)" }));
+    a.append(el("text", { x: m.l - 6, y: Y(tk) + 4, "text-anchor": "end" }, fmt(tk)));
+  }
+  values.forEach((v, i) => {
+    const x = m.l + slot * i + (slot - bw) / 2, y = Y(v), r = Math.min(4, bw / 2, (m.t + ph - y) / 2);
+    const bar = el("path", { d: `M${x} ${m.t + ph}V${y + r}Q${x} ${y} ${x + r} ${y}H${x + bw - r}Q${x + bw} ${y} ${x + bw} ${y + r}V${m.t + ph}Z`, fill: C(1) });
+    bar.append(el("title", {}, `Capability ${i + 1}: ${fmt(v)} (${Math.round(v / K * 100)}% of the total)`));
+    a.append(bar);
+  });
+  a.append(el("line", { x1: m.l, x2: m.l + pw, y1: m.t + ph, y2: m.t + ph, stroke: "var(--border)" }));
+  a.append(el("text", { x: m.l + slot / 2, y: Y(values[0]) - 6, "text-anchor": "middle", class: "lab" }, fmt(values[0])));
+  if (K > 1 && t > 0) a.append(el("text", { x: m.l + slot * 1.5 + (K > 2 ? slot * (K - 2) / 2 : 0), y: Y(values[1]) - 6, "text-anchor": "middle", class: "lab" }, fmt(values[1]) + " each"));
+  a.append(el("text", { x: m.l + pw / 2, y: H - 8, "text-anchor": "middle", class: "lab" }, `${K} capabilities, ${fmt(K)} units in total`));
+  hostA.append(a);
+
+  // right: two stacked bars, equal split against this split
+  const hostB = $("worthChart"); hostB.querySelector("svg")?.remove();
+  const W2 = Math.max(280, Math.round(hostB.clientWidth || 420)), m2 = { l: 84, r: 54 }, bh = 34, pw2 = W2 - m2.l - m2.r;
+  const b = el("svg", { viewBox: `0 0 ${W2} ${H}`, role: "img", "aria-label": "Network value with an equal split and with this split" });
+  const X = v => v / equal * pw2;
+  [["All equal", bonusEq, 46], ["This split", bonus, 126]].forEach(([name, bo, y]) => {
+    b.append(el("text", { x: m2.l - 10, y: y + bh / 2 + 4, "text-anchor": "end", class: "lab" }, name));
+    const d1 = el("rect", { x: m2.l, y, width: Math.max(0, X(K) - 1), height: bh, fill: C(1) });
+    d1.append(el("title", {}, `${name}: stand-alone value ${fmt(K)}`)); b.append(d1);
+    const wB = X(bo);
+    if (wB > 0.5) {
+      const x0 = m2.l + X(K) + 1, r = Math.min(4, wB / 2);
+      const d2 = el("path", { d: `M${x0} ${y}H${x0 + wB - r}Q${x0 + wB} ${y} ${x0 + wB} ${y + r}V${y + bh - r}Q${x0 + wB} ${y + bh} ${x0 + wB - r} ${y + bh}H${x0}Z`, fill: C(2) });
+      d2.append(el("title", {}, `${name}: bonus from pairs ${fmt(bo)}`)); b.append(d2);
+    }
+    b.append(el("text", { x: m2.l + X(K + bo) + 8, y: y + bh / 2 + 4, class: "lab", "font-weight": 600 }, fmt(K + bo)));
+    b.append(el("text", { x: m2.l, y: y + bh + 15 }, `${fmt(K)} stand-alone + ${fmt(bo)} from pairs`));
+  });
+  hostB.append(b);
+
+  $("uneqRead").textContent = t === 0
+    ? `With an equal split, ${K} capabilities are worth ${fmt(K)} on their own plus ${fmt(bonusEq)} from their ${fmt(K * (K - 1) / 2)} pairs. Move the first slider to concentrate the value in one capability.`
+    : `The capabilities are still worth ${fmt(K)} on their own. But with ${Math.round(p * 100)}% of the value in one capability, the pairs add ${fmt(bonus)}, not ${fmt(bonusEq)}: ${Math.round(kept * 100)}% of the bonus is kept. ` +
+      (kept > 0.85 ? "Moderate inequality costs little." : kept > 0.4 ? "Most pairs now join the large capability with a small one, or two small ones." : "The network is close to a single-capability chain: it has many capabilities but little to combine.");
 }
 
 function drawNetwork() {
@@ -419,12 +498,13 @@ function drawNetwork() {
 }
 
 if (typeof document !== "undefined") {
-  ["K", "etaMulti", "etaMeta", "skew"].forEach(id => $(id).addEventListener("input", drawCapabilities));
-  $("reset").addEventListener("click", () => { $("K").value = 50; $("etaMulti").value = 0.5; $("etaMeta").value = 0.75; $("skew").value = 0; drawCapabilities(); });
+  ["K", "etaMulti", "etaMeta"].forEach(id => $(id).addEventListener("input", drawCapabilities));
+  $("reset").addEventListener("click", () => { $("K").value = 50; $("etaMulti").value = 0.5; $("etaMeta").value = 0.75; drawCapabilities(); });
   ["U", "scaleLog", "scaleLin"].forEach(id => $(id).addEventListener("input", drawNetwork));
-  drawCapabilities(); drawNetwork();
+  ["K2", "topShare"].forEach(id => $(id).addEventListener("input", drawUnequal));
+  drawCapabilities(); drawUnequal(); drawNetwork();
   let lastW = window.innerWidth;
-  window.addEventListener("resize", () => { if (window.innerWidth !== lastW) { lastW = window.innerWidth; drawCapabilities(); drawNetwork(); } });
+  window.addEventListener("resize", () => { if (window.innerWidth !== lastW) { lastW = window.innerWidth; drawCapabilities(); drawUnequal(); drawNetwork(); } });
 }
 </script>
 </body>

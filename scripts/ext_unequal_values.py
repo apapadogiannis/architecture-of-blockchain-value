@@ -1,22 +1,26 @@
 """Extension, not in the article: Equation (7) with capabilities of unequal value.
 The article's Figure 5 uses the symmetric benchmark, where every capability is worth the same.
-Here the k-th capability is worth k^(-s) of the largest, for s = 0 (equal, the benchmark), 0.5 and 1,
-with the same complementarities as Figure 5 (eta = 0.5 multi, 0.75 meta) and the normalization
-V0 = value of the largest capability. Both the shape and the normalization are illustrative choices.
-The script also confirms that s = 0 returns Equation (14).
-Writes ext_unequal_values.csv, the table behind the "how unequal" control of the demo page.
+Here the total stand-alone value is kept the same (K units for K capabilities) and split unequally:
+the largest capability holds a given share and the others share the rest equally. One eta = 0.75
+applies to every pair and V0 is the average capability value. The direct term is then K whatever the
+split, so the table isolates what unequal values do to the bonus from pairs. The way the total is
+split is an illustrative choice. The script also confirms that an equal split returns Equation (14).
+Writes ext_unequal_values.csv, the table behind panel 2 of the demo page.
 Usage: python3 -I ext_unequal_values.py DATA_DIR OUT_DIR"""
 import sys, os, csv
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-from blockchain_value import unequal_value, effective_capabilities, benchmark_value
+from blockchain_value import unequal_value, benchmark_value
 
 OUT = sys.argv[2]
+ETA = 0.75
+rows = 0
 with open(f'{OUT}/ext_unequal_values.csv', 'w', newline='') as f:
-    w = csv.writer(f); w.writerow(['s', 'K', 'effective_capabilities', 'V_multi_eta_0.5', 'V_meta_eta_0.75'])
-    for s in (0.0, 0.5, 1.0):
-        for K in range(1, 51):
-            multi, meta = unequal_value(K, 0.5, s), unequal_value(K, 0.75, s)
-            if s == 0.0:
-                assert abs(multi - benchmark_value(K, 0.5)) < 1e-9 and abs(meta - benchmark_value(K, 0.75)) < 1e-9
-            w.writerow([f'{s:.1f}', K, f'{effective_capabilities(K, s):.6f}', f'{multi:.6f}', f'{meta:.6f}'])
-print('150 rows written to ext_unequal_values.csv')
+    w = csv.writer(f); w.writerow(['K', 'top_share', 'direct_value', 'pair_bonus', 'V', 'pair_bonus_if_equal'])
+    for K in range(2, 21):
+        equal = benchmark_value(K, ETA)
+        assert abs(unequal_value(K, ETA, 0.0) - equal) < 1e-9
+        for share in (0.0, 0.25, 0.5, 0.75, 0.9, 0.95):
+            v = unequal_value(K, ETA, share)
+            assert v <= equal + 1e-9
+            w.writerow([K, f'{share:.2f}', f'{K:.4f}', f'{v - K:.10f}', f'{v:.10f}', f'{equal - K:.10f}']); rows += 1
+print(f'{rows} rows written to ext_unequal_values.csv')
