@@ -4,7 +4,7 @@
 [![SSRN](https://img.shields.io/badge/SSRN-10.2139%2Fssrn.6196338-1f4e79)](https://doi.org/10.2139/ssrn.6196338)
 [![replication](https://github.com/apapadogiannis/architecture-of-blockchain-value/actions/workflows/replicate.yml/badge.svg)](https://github.com/apapadogiannis/architecture-of-blockchain-value/actions/workflows/replicate.yml)
 
-Model code, figures and an interactive demo for the paper by Agisilaos Papadogiannis, published in *Frontiers in Blockchain* 9:1747512 (2026).
+Replication package for the paper by Agisilaos Papadogiannis, published in *Frontiers in Blockchain* 9:1747512 (2026).
 Paper: `paper/fbloc-9-1747512.pdf` (published version, open access); journal page: [doi:10.3389/fbloc.2026.1747512](https://doi.org/10.3389/fbloc.2026.1747512); preprint on SSRN: [doi:10.2139/ssrn.6196338](https://doi.org/10.2139/ssrn.6196338).
 Interactive demo: [apapadogiannis.github.io/architecture-of-blockchain-value](https://apapadogiannis.github.io/architecture-of-blockchain-value/).
 
@@ -23,9 +23,9 @@ which capabilities are feasible:
 3. **Network effects set how value grows with users.** Sarnoff (*u*), Metcalfe (*u*²) and Reed
    (2^*u*) scaling give very different paths, and the paradigms differ in which one dominates.
 
-The paper estimates nothing and uses no dataset, so this package is not a replication of empirical
-results. It holds the model as code, the scripts that draw Figures 5 and 8, the numbers stated in
-Section 3, the paradigm tables in machine-readable form, and a small interactive page.
+The paper estimates nothing and uses no dataset. This package holds the model as code, the scripts
+that produce Figures 5 and 8 and the numbers stated in Section 3, the paradigm tables in
+machine-readable form, and a small interactive page.
 
 ## Interactive demo
 

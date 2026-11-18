@@ -1,7 +1,7 @@
 {
-  "title": "The architecture of blockchain value: model code, figures and interactive demo",
+  "title": "The architecture of blockchain value: capabilities, pillars, and growth dynamics: replication package",
   "upload_type": "software",
-  "description": "Model code, figures and an interactive demo for the paper published in Frontiers in Blockchain 9:1747512 (2026). The paper classifies blockchains into single-, multi- and meta-capability paradigms, describes five architectural pillars (purpose, consensus, incentives, tokenomics, network effects) and proposes a stylized valuation model in which network value depends on adoption, per-unit service value and pairwise complementarities between capabilities. Includes the model as a Python module, the scripts that draw Figures 5 and 8, the numbers stated in Section 3, the paradigm tables in machine-readable form and a single-page interactive demo.",
+  "description": "Replication package for the paper published in Frontiers in Blockchain 9:1747512 (2026). The paper classifies blockchains into single-, multi- and meta-capability paradigms, describes five architectural pillars (purpose, consensus, incentives, tokenomics, network effects) and proposes a stylized valuation model in which network value depends on adoption, per-unit service value and pairwise complementarities between capabilities. Includes the model as a Python module, the scripts that draw Figures 5 and 8, the numbers stated in Section 3, the paradigm tables in machine-readable form and a single-page interactive demo.",
   "creators": [
     {
       "name": "Papadogiannis, Agisilaos",

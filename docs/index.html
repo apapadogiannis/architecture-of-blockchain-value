@@ -76,6 +76,13 @@
   th, td { text-align: right; padding: 5px 12px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
   th { position: sticky; top: 0; background: var(--surface-1); color: var(--text-secondary); font-weight: 600; }
   th:first-child, td:first-child { text-align: left; }
+  .terms { display: grid; grid-template-columns: max-content 1fr; gap: 7px 16px; margin: 0 0 18px; padding: 12px 14px;
+           border: 1px solid var(--border); border-radius: 8px; font-size: 14.5px; }
+  .terms dt { font: italic 17px/1.4 Georgia, "Times New Roman", serif; white-space: nowrap; }
+  .terms dd { margin: 0; color: var(--text-secondary); }
+  .terms dd b { color: var(--text-primary); font-weight: 600; }
+  .terms .cap { grid-column: 1 / -1; font: 600 13px system-ui, sans-serif; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+  @media (max-width: 560px) { .terms { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 8px; } }
   .read { color: var(--text-secondary); font-size: 14.5px; margin: 10px 0 0; max-width: 75ch; }
   footer { margin-top: 28px; font-size: 13.5px; color: var(--text-secondary); }
   footer p { margin: 0 0 8px; max-width: 80ch; }
@@ -96,7 +103,19 @@
   <h2>1. More capabilities, and how strongly they reinforce one another</h2>
   <p class="lede">A blockchain delivers <i>K</i> capabilities (services). Each one is worth the same on its own, and every pair adds a bonus of size <i>η</i> because the two can be used together. Value then grows with the number of pairs, which is why it curves upward.</p>
   <div class="eq"><i>V</i> = <i>φ</i> <i>u</i> <i>N</i>(<i>u</i>) · [ <i>K</i> + <i>η</i> · <i>K</i>(<i>K</i> − 1) / 2 ]</div>
-  <p class="eqnote">Equation (14). The chart shows the bracket, that is, value with <i>φ</i> = <i>u</i> = <i>N</i> = 1.</p>
+  <p class="eqnote">Equation (14) of the paper.</p>
+  <dl class="terms">
+    <div class="cap">What each term means</div>
+    <dt>V</dt><dd><b>Network value.</b> The total economic value of the blockchain: the sum of what its capabilities are worth, alone and in combination.</dd>
+    <dt>φ</dt><dd><b>Value per unit.</b> What one user's use of one capability is worth. It sums up price, quality and scarcity in a single number, in currency or as an index.</dd>
+    <dt>u</dt><dd><b>User base.</b> The number of users of the network. This benchmark assumes full adoption: every user uses every capability.</dd>
+    <dt>N(u)</dt><dd><b>Network-effect multiplier.</b> How much more useful a capability becomes as its user base grows. It is a pure number: 1 means no network effect. Panel 2 shows three forms it can take.</dd>
+    <dt>φ u N(u)</dt><dd><b>Value of one capability on its own.</b> Per-unit value, times users, times the network effect. Everything in the bracket is counted in units of this.</dd>
+    <dt>K</dt><dd><b>Number of capabilities.</b> How many distinct services the blockchain delivers. A single-capability network has <i>K</i> = 1, for example value transfer only.</dd>
+    <dt>η</dt><dd><b>Complementarity.</b> The extra value created when two capabilities are used together, as a fraction of one capability's value. With <i>η</i> = 0 the capabilities do not interact; with <i>η</i> = 0.5 every pair adds half a capability's worth.</dd>
+    <dt>K(K − 1) / 2</dt><dd><b>Number of pairs.</b> How many different pairs can be formed from <i>K</i> capabilities: 1 pair for 2 capabilities, 45 for 10, 1,225 for 50.</dd>
+    <dt>[ … ]</dt><dd><b>The bracket.</b> The first term, <i>K</i>, counts the capabilities themselves. The second, <i>η K</i>(<i>K</i> − 1)/2, counts the bonus from all pairs. <b>The chart plots this bracket</b>, that is, value with <i>φ</i> = <i>u</i> = <i>N</i> = 1, so that only the effect of capabilities and complementarity is visible.</dd>
+  </dl>
   <div class="controls">
     <div class="control"><label for="K"><span>Capabilities <i>K</i></span> <output id="Kout"></output></label><input id="K" type="range" min="1" max="50" step="1" value="50"></div>
     <div class="control"><label for="etaMulti"><span>Multi-capability <i>η</i></span> <output id="etaMultiOut"></output></label><input id="etaMulti" type="range" min="0" max="1" step="0.05" value="0.5"></div>
@@ -113,7 +132,17 @@
 
 <section class="card" id="net">
   <h2>2. How value grows with the number of users</h2>
-  <p class="lede">The term <i>u</i> <i>N</i>(<i>u</i>) in the equation above depends on how users connect. Three classical laws give three very different curves. The paper associates single-capability networks mainly with Metcalfe, multi-capability networks with a move from Metcalfe toward Reed, and meta-capability networks with Reed.</p>
+  <p class="lede">In the equation of panel 1, the part <i>u</i> <i>N</i>(<i>u</i>) depends on how users connect. Three classical laws give three very different curves. The paper associates single-capability networks mainly with Metcalfe, multi-capability networks with a move from Metcalfe toward Reed, and meta-capability networks with Reed.</p>
+  <div class="eq"><i>V</i>(<i>u</i>) = <i>u</i> <i>N</i>(<i>u</i>)</div>
+  <p class="eqnote">One capability (<i>K</i> = 1) with <i>φ</i> = 1, so that only the effect of users is visible.</p>
+  <dl class="terms">
+    <div class="cap">What each term means</div>
+    <dt>u</dt><dd><b>Number of users</b> of the network.</dd>
+    <dt>V(u)</dt><dd><b>Network value</b> when the network has <i>u</i> users. Units are arbitrary; what matters is the shape of the curve.</dd>
+    <dt>Sarnoff: V = u</dt><dd><b>Value grows in step with users</b>, so <i>N</i>(<i>u</i>) = 1. Each user adds the same amount, as in broadcasting, where users receive but do not connect to one another.</dd>
+    <dt>Metcalfe: V = u²</dt><dd><b>Value grows with the number of possible links</b> between two users, so <i>N</i>(<i>u</i>) = <i>u</i>. Typical of peer-to-peer payments: each new user can transact with every existing one.</dd>
+    <dt>Reed: V = 2ᵘ</dt><dd><b>Value grows with the number of possible groups</b> users can form, so <i>N</i>(<i>u</i>) = 2ᵘ / <i>u</i>. Each new user doubles the count. Typical of systems built for coalitions, such as subnets or application clusters.</dd>
+  </dl>
   <div class="controls">
     <div class="control"><label for="U"><span>Users <i>u</i></span> <output id="Uout"></output></label><input id="U" type="range" min="1" max="20" step="1" value="8"></div>
     <div class="control">
@@ -181,7 +210,7 @@ function fmt(v) {
 }
 function compact(v) {
   if (v >= 1e6) return (v / 1e6) + "M";
-  if (v >= 1e4) return (v / 1e3) + "k";
+  if (v >= 1e3) return (v / 1e3) + "k";
   return fmt(v);
 }
 function niceTicks(max, n = 5) {
