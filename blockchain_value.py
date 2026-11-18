@@ -125,3 +125,39 @@ def complementarity_share(K: int, eta: float) -> float:
     """Share of the Equation (14) value that comes from the pairwise term rather than the direct term."""
     pairs = eta * K * (K - 1) / 2.0
     return pairs / (K + pairs)
+
+
+# ---------------------------------------------------------------------------------------------
+# Beyond the published figures. The article's figures use the symmetric benchmark, in which every
+# capability is worth the same. The two functions below apply Equation (7), as published, to
+# capabilities of unequal value. The shape of the inequality and the normalization are choices made
+# here for illustration; they are not in the article.
+
+def ranked_capabilities(K: int, s: float) -> list:
+    """K capabilities whose stand-alone values fall with rank: the k-th is worth k**(-s).
+
+    s = 0 gives equal values (the article's benchmark). s = 1 makes the second capability worth half
+    of the first and the tenth worth a tenth. Full adoption, u = 1 and N = 1, as in Figure 5.
+    """
+    if K < 1:
+        raise ValueError("K must be at least 1")
+    if s < 0:
+        raise ValueError("s must be non-negative")
+    return [Capability(f"c{k}", phi=float(k) ** (-s)) for k in range(1, K + 1)]
+
+
+def unequal_value(K: int, eta: float, s: float) -> float:
+    """Equation (7) for K capabilities of unequal value, with one complementarity eta for every pair.
+
+    Values are those of ranked_capabilities(K, s). The normalization V0 is the value of the largest
+    capability (here 1), so that s = 0 reproduces Equation (14) exactly. Other normalizations change
+    the level of the result. In closed form, with S1 = sum of values and S2 = sum of squared values,
+    V = S1 + eta (S1**2 - S2) / 2.
+    """
+    return network_value(ranked_capabilities(K, s), u=1.0, eta=eta, V0=1.0)
+
+
+def effective_capabilities(K: int, s: float) -> float:
+    """Effective number of capabilities, S1**2 / S2: K when values are equal, near 1 when one dominates."""
+    v = [float(k) ** (-s) for k in range(1, K + 1)]
+    return sum(v) ** 2 / sum(x * x for x in v)
