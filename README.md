@@ -24,8 +24,8 @@ which capabilities are feasible:
    (2^*u*) scaling give very different paths, and the paradigms differ in which one dominates.
 
 The paper estimates nothing and uses no dataset. This package holds the model as code, the scripts
-that produce Figures 5 and 8 and the numbers stated in Section 3, the paradigm tables in
-machine-readable form, and a small interactive page.
+that produce Figures 5 and 8 and the numbers stated in Section 3, the drawing code of the six
+diagrams, the paradigm tables in machine-readable form, and a small interactive page.
 
 ## Interactive demo
 
@@ -65,7 +65,7 @@ network_value(caps, u=1.0, eta=0.3, V0=100.0)   # 230.0, the example of footnote
 blockchain_value.py   the valuation model (Equations 5 to 19 and the scaling laws)
 scripts/    one script per figure or calculation (see below)
 outputs/    the tables behind the figures, the numbers stated in the text, the taxonomy (CSV, JSON)
-figures/    Figures 5 and 8 (PNG and PDF)
+figures/    all eight figures (PNG and PDF; the six diagrams also as SVG, with their TikZ sources in tikz/)
 data/       Tables 2 to 6 of the paper as CSV (see Data and licensing)
 docs/       the interactive demo page
 paper/      the published article (PDF)
@@ -93,7 +93,19 @@ Each takes `python3 -I <script>.py DATA_DIR OUT_DIR`.
 | `ext_unequal_values.py` | Equation (7) with the same total value split unequally among 2 to 20 capabilities; `ext_unequal_values.csv` | Not in the paper: the table behind panel 2 of the demo (see above) |
 | `fig8_scaling_laws.py` | Sarnoff, Metcalfe and Reed scaling for 1 to 20 users; `fig8_scaling_laws.csv` | Figure 8 |
 
-Figures 1 to 4, 6 and 7 are diagrams without numerical content and are not redrawn here; they are in the paper.
+Figures 1 to 4, 6 and 7 are diagrams without numerical content. Their drawing code, taken from the
+author's manuscript, is in `figures/tikz/`, one file per figure, and the compiled diagrams are in
+`figures/` as PDF, PNG and SVG. `figures/tikz/build.sh` recompiles them (it needs LaTeX with TikZ and
+`pdftocairo`); it is not part of `run_all.sh`, because the diagrams contain no numbers to check.
+
+| Figure | File | What it shows |
+|---|---|---|
+| 1 | `fig1_transaction_flow` | The seven steps of a transaction, from creation to rewards |
+| 2 | `fig2_capabilities_pillars` | Capabilities at the center of the five pillars |
+| 3 | `fig3_communication_structures` | Communication structures of the three paradigms |
+| 4 | `fig4_capability_sets` | The three paradigms as nested sets |
+| 6 | `fig6_consensus_evolution` | Consensus mechanisms across the paradigms |
+| 7 | `fig7_incentive_layering` | Incentive layers, each inheriting from the one below |
 
 ## How the check works
 

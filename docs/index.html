@@ -82,6 +82,19 @@
   .terms dt { font: italic 17px/1.4 Georgia, "Times New Roman", serif; white-space: nowrap; }
   .terms dd { margin: 0; color: var(--text-secondary); }
   .terms dd b { color: var(--text-primary); font-weight: 600; }
+  .kinds3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 0 16px; }
+  .kind { border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .kind svg { display: block; width: 116px; height: 116px; margin: 0 auto 10px; }
+  .kind h3 { font: 600 15.5px/1.4 system-ui, sans-serif; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+  .kind p { margin: 0; font-size: 14.5px; color: var(--text-secondary); } .kind p b { color: var(--text-primary); font-weight: 600; }
+  .kind svg *, .nested svg * { fill: var(--surface-1); stroke: var(--text-muted); stroke-width: 1.4; }
+  .kind svg text, .nested svg text { fill: var(--text-secondary); stroke: none; font: 12px system-ui, sans-serif; }
+  .kind svg circle { stroke-width: 2; } .kind svg .cluster { fill: var(--grid); stroke: var(--border); }
+  .kind svg .frame, .nested svg .frame { fill: none; stroke: var(--border); } .kind svg .bridge { stroke-dasharray: 3 3; }
+  .nested { margin: 0; } .nested figcaption { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 8px; max-width: 75ch; }
+  .nested svg { display: block; width: 100%; max-width: 560px; height: auto; } .nested svg .set { fill: var(--grid); fill-opacity: .45; stroke-width: 2; }
+  .nested svg text { font-size: 13px; }
+  @media (max-width: 760px) { .kinds3 { grid-template-columns: 1fr; } .kind { display: flex; gap: 14px; align-items: flex-start; } .kind svg { width: 84px; height: 84px; margin: 0; flex: none; } }
   .terms.kinds dt { font: 600 15px/1.5 system-ui, sans-serif; display: flex; align-items: center; gap: 8px; }
   .terms .cap { grid-column: 1 / -1; font: 600 13px system-ui, sans-serif; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
   @media (max-width: 560px) { .terms { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 8px; } }
@@ -107,11 +120,20 @@
 <section class="card" id="kinds">
   <h2>Three kinds of blockchain</h2>
   <p class="lede">The paper sorts blockchains by what they can deliver. A <i>capability</i> is a distinct type of service that a blockchain reliably provides, such as transferring value or running smart contracts. The three kinds below are the three curves in the first chart.</p>
-  <dl class="terms kinds">
-    <dt><i class="key" style="border-top-color: var(--series-1); border-top-style: dashed"></i>Single-capability</dt><dd><b>One narrowly defined service.</b> The capability set has a single element, typically peer-to-peer value transfer. Examples in the paper: Bitcoin, Litecoin, Monero.</dd>
-    <dt><i class="key" style="border-top-color: var(--series-2)"></i>Multi-capability</dt><dd><b>Several services inside one programmable environment.</b> Smart contracts let payments, tokens, lending and other applications run side by side and call one another. The set is larger but bounded. Examples in the paper: Ethereum, Solana, Cardano.</dd>
-    <dt><i class="key" style="border-top-color: var(--series-3)"></i>Meta-capability</dt><dd><b>An open-ended market of services.</b> The network hosts whole sub-networks (subnets, parachains, zones), each able to define new services, and lets them interoperate. Examples in the paper: Bittensor, Polkadot, Cosmos, Avalanche.</dd>
-  </dl>
+  <div class="kinds3">
+    <div class="kind"><svg viewBox="0 0 120 120" role="img" aria-label="One service inside a bounded environment"><rect x="6" y="6" width="108" height="108" rx="8" class="frame"/><circle cx="60" cy="60" r="27" style="stroke:var(--series-1)"/><text x="60" y="64" text-anchor="middle">Service</text></svg><div><h3><i class="key" style="border-top-color: var(--series-1); border-top-style: dashed"></i>Single-capability</h3><p><b>One narrowly defined service.</b> The capability set has a single element, typically peer-to-peer value transfer. Examples in the paper: Bitcoin, Litecoin, Monero.</p></div></div>
+    <div class="kind"><svg viewBox="0 0 120 120" role="img" aria-label="Three services in one environment, each linked to the others"><rect x="6" y="6" width="108" height="108" rx="8" class="frame"/><line x1="60.0" y1="34.0" x2="30.1" y2="82.1"/><line x1="30.1" y1="82.1" x2="89.9" y2="82.1"/><line x1="89.9" y1="82.1" x2="60.0" y2="34.0"/><circle cx="60.0" cy="34.0" r="11" style="stroke:var(--series-2)"/><circle cx="30.1" cy="82.1" r="11" style="stroke:var(--series-2)"/><circle cx="89.9" cy="82.1" r="11" style="stroke:var(--series-2)"/></svg><div><h3><i class="key" style="border-top-color: var(--series-2)"></i>Multi-capability</h3><p><b>Several services inside one programmable environment.</b> Smart contracts let payments, tokens, lending and other applications run side by side and call one another. The set is larger but bounded. Examples in the paper: Ethereum, Solana, Cardano.</p></div></div>
+    <div class="kind"><svg viewBox="0 0 120 120" role="img" aria-label="Several clusters of services, linked to one another by bridges"><rect x="6" y="6" width="108" height="108" rx="8" class="frame"/><rect x="12" y="17" width="42" height="38" rx="6" class="cluster"/><rect x="66" y="17" width="42" height="38" rx="6" class="cluster"/><rect x="39" y="69" width="42" height="38" rx="6" class="cluster"/><line x1="33.0" y1="28.0" x2="87.0" y2="28.0" class="bridge"/><line x1="43.4" y1="44.6" x2="76.7" y2="44.6" class="bridge"/><line x1="97.3" y1="44.6" x2="60.0" y2="80.0" class="bridge"/><line x1="22.6" y1="44.6" x2="49.6" y2="96.7" class="bridge"/><line x1="33.0" y1="28.0" x2="22.6" y2="44.6"/><line x1="22.6" y1="44.6" x2="43.4" y2="44.6"/><line x1="43.4" y1="44.6" x2="33.0" y2="28.0"/><circle cx="33.0" cy="28.0" r="5.5" style="stroke:var(--series-3)"/><circle cx="22.6" cy="44.6" r="5.5" style="stroke:var(--series-3)"/><circle cx="43.4" cy="44.6" r="5.5" style="stroke:var(--series-3)"/><line x1="87.0" y1="28.0" x2="76.7" y2="44.6"/><line x1="76.7" y1="44.6" x2="97.3" y2="44.6"/><line x1="97.3" y1="44.6" x2="87.0" y2="28.0"/><circle cx="87.0" cy="28.0" r="5.5" style="stroke:var(--series-3)"/><circle cx="76.7" cy="44.6" r="5.5" style="stroke:var(--series-3)"/><circle cx="97.3" cy="44.6" r="5.5" style="stroke:var(--series-3)"/><line x1="60.0" y1="80.0" x2="49.6" y2="96.7"/><line x1="49.6" y1="96.7" x2="70.3" y2="96.7"/><line x1="70.3" y1="96.7" x2="60.0" y2="80.0"/><circle cx="60.0" cy="80.0" r="5.5" style="stroke:var(--series-3)"/><circle cx="49.6" cy="96.7" r="5.5" style="stroke:var(--series-3)"/><circle cx="70.3" cy="96.7" r="5.5" style="stroke:var(--series-3)"/></svg><div><h3><i class="key" style="border-top-color: var(--series-3)"></i>Meta-capability</h3><p><b>An open-ended market of services.</b> The network hosts whole sub-networks (subnets, parachains, zones), each able to define new services, and lets them interoperate (dashed lines). Examples in the paper: Bittensor, Polkadot, Cosmos, Avalanche.</p></div></div>
+  </div>
+  <figure class="nested"><figcaption>Each kind contains the one before it: whatever a single-capability chain can do, a multi-capability chain can also do, and so on.</figcaption>
+    <svg viewBox="0 0 560 176" role="img" aria-label="Nested sets: single-capability inside multi-capability inside meta-capability inside the set of all possible services">
+      <rect x="2" y="2" width="556" height="172" rx="10" class="frame"/><text x="14" y="21">All services a blockchain could deliver</text>
+      <rect x="40" y="30" width="480" height="134" rx="9" class="set" style="stroke:var(--series-3)"/><text x="52" y="49">Meta-capability</text>
+      <rect x="100" y="58" width="360" height="96" rx="8" class="set" style="stroke:var(--series-2)"/><text x="112" y="77">Multi-capability</text>
+      <rect x="180" y="86" width="200" height="58" rx="7" class="set" style="stroke:var(--series-1)"/><text x="280" y="119" text-anchor="middle">Single-capability</text>
+    </svg>
+  </figure>
+  <p class="eqnote" style="margin:6px 0 12px; padding:0">The drawings follow Figures 3 and 4 of the paper.</p>
   <p class="read">In the model the kinds differ in two ways: how many capabilities they have (<i>K</i>), and how strongly those capabilities reinforce one another (<i>η</i>). A single-capability chain has <i>K</i> = 1 and nothing to combine. The paper assumes a meta-capability chain has at least as many capabilities, and at least as much complementarity, as a multi-capability one.</p>
 </section>
 
