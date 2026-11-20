@@ -1,11 +1,13 @@
 # The architecture of blockchain value: capabilities, pillars, and growth dynamics
 
+[![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.24404059-007ec6)](https://doi.org/10.5281/zenodo.24404059)
 [![Article](https://img.shields.io/badge/Frontiers-10.3389%2Ffbloc.2026.1747512-1f4e79)](https://doi.org/10.3389/fbloc.2026.1747512)
 [![SSRN](https://img.shields.io/badge/SSRN-10.2139%2Fssrn.5401302-1f4e79)](https://doi.org/10.2139/ssrn.5401302)
 [![replication](https://github.com/apapadogiannis/architecture-of-blockchain-value/actions/workflows/replicate.yml/badge.svg)](https://github.com/apapadogiannis/architecture-of-blockchain-value/actions/workflows/replicate.yml)
 
 Replication package for the paper by Agisilaos Papadogiannis, published in *Frontiers in Blockchain* 9:1747512 (2026).
 Paper: `paper/fbloc-9-1747512.pdf` (published version, open access); journal page: [doi:10.3389/fbloc.2026.1747512](https://doi.org/10.3389/fbloc.2026.1747512); preprint on SSRN: [doi:10.2139/ssrn.5401302](https://doi.org/10.2139/ssrn.5401302).
+Archived on Zenodo: [doi:10.5281/zenodo.24404059](https://doi.org/10.5281/zenodo.24404059).
 Interactive demo: [apapadogiannis.github.io/architecture-of-blockchain-value](https://apapadogiannis.github.io/architecture-of-blockchain-value/).
 
 ## What this is
@@ -152,6 +154,11 @@ differ slightly between versions of the plotting library.
 > Papadogiannis, A. (2026). "The architecture of blockchain value: capabilities, pillars, and growth dynamics." *Frontiers in Blockchain* 9:1747512.
 > https://doi.org/10.3389/fbloc.2026.1747512
 > SSRN: https://doi.org/10.2139/ssrn.5401302
+
+Code and data:
+
+> Papadogiannis, A. (2026). "The architecture of blockchain value: replication package." Zenodo.
+> https://doi.org/10.5281/zenodo.24404059
 
 ## Disclaimer
 
