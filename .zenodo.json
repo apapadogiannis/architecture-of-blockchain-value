@@ -1,7 +1,7 @@
 {
   "title": "The architecture of blockchain value: capabilities, pillars, and growth dynamics: replication package",
   "upload_type": "software",
-  "description": "Replication package for the paper published in Frontiers in Blockchain 9:1747512 (2026). The paper classifies blockchains into single-, multi- and meta-capability paradigms, describes five architectural pillars (purpose, consensus, incentives, tokenomics, network effects) and proposes a stylized valuation model in which network value depends on adoption, per-unit service value and pairwise complementarities between capabilities. Includes the model as a Python module, the scripts that draw Figures 5 and 8, the numbers stated in Section 3, the paradigm tables in machine-readable form and a single-page interactive demo.",
+  "description": "Replication package for the paper published in Frontiers in Blockchain 9:1747512 (2026). The paper classifies blockchains into single-, multi- and meta-capability paradigms, describes five architectural pillars (purpose, consensus, incentives, tokenomics, network effects) and proposes a stylized valuation model in which network value depends on adoption, per-unit service value and pairwise complementarities between capabilities. Includes the model as a Python module, the scripts that draw Figures 5 and 8, the numbers stated in Section 3, the drawing code of the six diagrams, the paradigm tables in machine-readable form and a single-page interactive demo (https://apapadogiannis.github.io/architecture-of-blockchain-value/).",
   "creators": [
     {
       "name": "Papadogiannis, Agisilaos",
@@ -33,6 +33,11 @@
     {
       "relation": "isSupplementTo",
       "identifier": "https://github.com/apapadogiannis/architecture-of-blockchain-value",
+      "scheme": "url"
+    },
+    {
+      "relation": "isSupplementedBy",
+      "identifier": "https://apapadogiannis.github.io/architecture-of-blockchain-value/",
       "scheme": "url"
     }
   ]

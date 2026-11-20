@@ -6,9 +6,10 @@ authors:
     given-names: Agisilaos
     orcid: "https://orcid.org/0009-0002-7753-7052"
 date-released: 2026-11-20
-version: "1.0"
+version: "1.0.1"
 license: MIT
 repository-code: "https://github.com/apapadogiannis/architecture-of-blockchain-value"
+url: "https://apapadogiannis.github.io/architecture-of-blockchain-value/"
 preferred-citation:
   type: article
   title: "The architecture of blockchain value: capabilities, pillars, and growth dynamics"
