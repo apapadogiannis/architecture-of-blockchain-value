@@ -61,7 +61,7 @@
       }
     },
     {
-      "what": "Share of that value that comes from complementarities between capabilities, multi-capability case",
+      "what": "Share of the multi-capability network's value that comes from complementarities between capabilities",
       "value": 92.5,
       "unit": "per cent",
       "where": "Equation (14)",
@@ -69,6 +69,20 @@
         "file": "outputs/text_numbers.csv",
         "row": {
           "quantity": "fig5_share_from_complementarity_multi_K50"
+        },
+        "column": "value",
+        "multiplied_by": 100
+      }
+    },
+    {
+      "what": "Share of the meta-capability network's value that comes from complementarities between capabilities",
+      "value": 94.8,
+      "unit": "per cent",
+      "where": "Equation (14)",
+      "source": {
+        "file": "outputs/text_numbers.csv",
+        "row": {
+          "quantity": "fig5_share_from_complementarity_meta_K50"
         },
         "column": "value",
         "multiplied_by": 100

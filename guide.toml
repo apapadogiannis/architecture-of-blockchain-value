@@ -29,6 +29,11 @@ files = [
   "paper/: the published article (open access, CC BY).",
 ]
 read = [
+  "The value equation is V = K + eta x K x (K - 1) / 2 in units of one capability: with 50 capabilities and eta = 0.75 it gives 968.75.",
+  "The rows of text_numbers.csv named eq7_ and eq14_ use other parameter values (phi = 2, u = 3, N = 5, so one capability is worth 30), to show that the closed form equals the general sum whatever the scale. They are 30 times the normalised figures; multi means eta = 0.5 and meta eta = 0.75.",
+  "In the corollary rows, lambda is the ratio of the number of capabilities of a meta-capability network to that of a multi-capability one; the ratio of values tends to (0.75 / 0.5) x lambda squared.",
+  "Reed's law is stored as 2 to the power u, as in the article's figure, not as 2^u - u - 1.",
+  "In ext_unequal_values.csv the complementarity is 0.75; a `top_share` at or below an equal share returns the equal split.",
   "Everything here is theory. The numbers are consequences of the article's equations at stated parameter values; none is an estimate of the value of any network.",
   "The complementarity values 0.5 and 0.75 are stylised parameters chosen for illustration, as the article says.",
   "Values are normalised and have no currency.",
@@ -58,9 +63,19 @@ unit = "(normalised units)"
 where = "Figure 5, Equation (19)"
 
 [[headline]]
-what = "Share of that value that comes from complementarities between capabilities, multi-capability case"
+what = "Share of the multi-capability network's value that comes from complementarities between capabilities"
 file = "text_numbers.csv"
 row = { quantity = "fig5_share_from_complementarity_multi_K50" }
+column = "value"
+scale = 100
+decimals = 1
+unit = "per cent"
+where = "Equation (14)"
+
+[[headline]]
+what = "Share of the meta-capability network's value that comes from complementarities between capabilities"
+file = "text_numbers.csv"
+row = { quantity = "fig5_share_from_complementarity_meta_K50" }
 column = "value"
 scale = 100
 decimals = 1
