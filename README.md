@@ -10,6 +10,16 @@ Paper: `paper/fbloc-9-1747512.pdf` (published version, open access); journal pag
 Archived on Zenodo: [doi:10.5281/zenodo.24404059](https://doi.org/10.5281/zenodo.24404059).
 Interactive demo: [apapadogiannis.github.io/architecture-of-blockchain-value](https://apapadogiannis.github.io/architecture-of-blockchain-value/).
 
+## For AI agents and programs
+
+Read [`llms.txt`](llms.txt) first. It says what the package holds, what it adds over reading the
+paper or recomputing, how to read the figures and what not to use them for. It opens with the
+headline figures. [`outputs/results.json`](outputs/results.json) holds the same headline figures,
+each with the table cell it is read from, a description of the result tables and their columns, and
+the paper, the identifiers, the version, the licence and the citation under its `package` key. Both
+files are written by `scripts/make_guide.py` from `CITATION.cff`, `guide.toml` and the stored tables,
+and both are covered by the check.
+
 ## What this is
 
 The paper is a theory paper. It asks what a blockchain can deliver (its *capabilities*) and how
@@ -66,7 +76,8 @@ network_value(caps, u=1.0, eta=0.3, V0=100.0)   # 230.0, the example of footnote
 ```
 blockchain_value.py   the valuation model (Equations 5 to 19 and the scaling laws)
 scripts/    one script per figure or calculation (see below)
-outputs/    the tables behind the figures, the numbers stated in the text, the taxonomy (CSV, JSON)
+outputs/    the tables behind the figures, the numbers stated in the text, the taxonomy (CSV, JSON); results.json describes them
+llms.txt    guide for AI agents and programs, generated; guide.toml holds its statements about this package
 figures/    all eight figures (PNG and PDF; the six diagrams also as SVG, with their TikZ sources in tikz/)
 data/       Tables 2 to 6 of the paper as CSV (see Data and licensing)
 docs/       the interactive demo page
@@ -112,7 +123,7 @@ author's manuscript, is in `figures/tikz/`, one file per figure, and the compile
 ## How the check works
 
 ```bash
-python3 check_outputs.py    # reruns ./run_all.sh, then compares
+python3 check_outputs.py --also llms.txt    # reruns ./run_all.sh, then compares
 ```
 
 1. The result tables in `outputs/` are stored in this repository exactly as they were when the

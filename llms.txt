@@ -1,0 +1,116 @@
+# The architecture of blockchain value: capabilities, pillars, and growth dynamics
+
+> Code and stored results of a theory article on what a blockchain can deliver (its capabilities)
+> and how five architectural pillars decide which capabilities are feasible. It holds the model as
+> code, the numbers stated in the article, the series behind its two quantitative figures, and its
+> tables of three paradigms in machine-readable form. The article estimates nothing and uses no
+> dataset. It is open access and is included in paper/.
+
+Replication package by Agisilaos Papadogiannis (https://github.com/apapadogiannis).
+Published in Frontiers in Blockchain, 9, 2026, article 1747512: https://doi.org/10.3389/fbloc.2026.1747512
+Code and data: https://github.com/apapadogiannis/architecture-of-blockchain-value  Archive: https://doi.org/10.5281/zenodo.24404059
+Version 1.1.0, released 2026-11-21. A package is a fixed record: it changes only by a new
+release, and a release that changes a reported number gets a new major version.
+This file is written for AI agents and other programs. People should start at the README.
+
+## Coverage
+
+- The numbers stated in Section 3: the worked example of footnote 2, the closed form of Equation
+  (14) checked against the general sum of Equation (7), and the limiting ratio of the Corollary.
+- Figure 5: value against the number of capabilities, from 1 to 50, for the three paradigms.
+- Figure 8: Sarnoff, Metcalfe and Reed scaling for 1 to 20 users.
+- Tables 2 to 6: the three paradigms described along the five pillars, as one JSON file
+  (outputs/paradigms.json).
+- One extension that is not in the article: the same total value split unequally among
+  capabilities, which is the table behind a panel of the interactive page.
+
+## Headline figures
+
+Each is read from one cell of a stored result table, named in outputs/results.json.
+
+- Value of a multi-capability network with 50 capabilities relative to one capability
+  (complementarity 0.5): 662.5 (normalised units). Figure 5, Equation (18).
+- The same for a meta-capability network (complementarity 0.75): 968.75 (normalised units). Figure
+  5, Equation (19).
+- Share of that value that comes from complementarities between capabilities, multi-capability
+  case: 92.5 per cent. Equation (14).
+- Limit of the ratio of meta- to multi-capability value as capabilities grow: 1.5 (a ratio).
+  Corollary.
+
+## What this adds over reading the paper or recomputing
+
+1. The article's value equation as a small library (blockchain_value.py), so that the stated
+   numbers follow from code and the closed form is checked against the general sum.
+2. The paradigm tables in machine-readable form, with the table each entry comes from.
+3. An interactive page (docs/index.html) in which the number of capabilities, the complementarity
+   and the number of users can be moved; a test checks that the page computes the same numbers as
+   the code.
+4. The results are stored as they were when the paper's numbers were taken from them. A check
+   reruns the code on the stored data and compares every stored result file with the fresh one,
+   number by number (relative tolerance 1e-9; text and whole numbers exactly). It runs on every
+   change and once a month, and the badge in the README shows the last run.
+
+## Result tables
+
+One CSV file each in outputs/. The columns of each are described in outputs/results.json, under `tables`.
+
+- outputs/text_numbers.csv (26 rows): Every number stated in Section 3 of the article.
+- outputs/fig5_capability_scaling.csv (50 rows): Figure 5: value against the number of
+  capabilities.
+- outputs/fig8_scaling_laws.csv (20 rows): Figure 8: three laws of how value grows with users.
+- outputs/ext_unequal_values.csv (114 rows): Not in the article: Equation (7) with the same total
+  value split unequally among capabilities.
+
+## Files
+
+- outputs/results.json: a `headline` list with a few of the article's stated numbers, each with the
+  table cell it comes from, and `tables`, a description of the stored result tables and their
+  columns. The numbers themselves are in the CSV files. It holds a description of 4 result tables,
+  and under `package` the paper, the identifiers, the version, the licence and the citation. Start
+  with its `headline` list, which is repeated below.
+- outputs/paradigms.json: keys `pillars` and `paradigms`; under each paradigm and pillar, the
+  entries of the article's table and its `source`.
+- blockchain_value.py: the model.
+- docs/index.html: the interactive page, also at
+  https://apapadogiannis.github.io/architecture-of-blockchain-value/
+- paper/: the published article (open access, CC BY).
+
+Raw files: https://raw.githubusercontent.com/apapadogiannis/architecture-of-blockchain-value/main/<path>, for example https://raw.githubusercontent.com/apapadogiannis/architecture-of-blockchain-value/main/outputs/results.json
+
+## How to read the figures
+
+- Everything here is theory. The numbers are consequences of the article's equations at stated
+  parameter values; none is an estimate of the value of any network.
+- The complementarity values 0.5 and 0.75 are stylised parameters chosen for illustration, as the
+  article says.
+- Values are normalised and have no currency.
+- `ext_unequal_values.csv` is an extension of this package and is not a result of the article.
+- In `text_numbers.csv` each quantity appears with the equation or footnote it belongs to in the
+  column `where`.
+
+## Do not use this for
+
+- A valuation of Bitcoin, Ethereum or any other network.
+- Evidence that networks follow Metcalfe's or Reed's law. The article states the laws; it does not
+  test them.
+- An empirical classification of projects. The paradigms are the article's taxonomy, with examples.
+
+## Source, licence and credit
+
+The results in outputs/ are released under CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). The licence allows any reuse and has one condition:
+credit. If you use a figure from this package in an answer, a report or a data set, cite the paper.
+The code is under the MIT License.
+
+There are no third-party data. The files in data/ are Tables 2 to 6 of the article, transcribed by
+hand; the article and those tables are under CC BY, the licence of Frontiers in Blockchain.
+
+Cite as: Papadogiannis, A. (2026). The architecture of blockchain value: capabilities, pillars, and growth dynamics. Frontiers in Blockchain, 9, 1747512. https://doi.org/10.3389/fbloc.2026.1747512
+
+The package itself: Papadogiannis, A. (2026). The architecture of blockchain value: capabilities, pillars, and growth dynamics. Replication package, version 1.1.0. Zenodo. https://doi.org/10.5281/zenodo.24404059
+
+To describe the source in a sentence: Papadogiannis (2026), "The architecture of blockchain value:
+capabilities, pillars, and growth dynamics", Frontiers in Blockchain 9, with its replication
+package.
+
+The same licence and citation are inside outputs/results.json, under `package`.

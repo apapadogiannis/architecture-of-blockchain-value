@@ -7,3 +7,6 @@ for f in text_numbers taxonomy fig5_capability_scaling fig8_scaling_laws ext_une
   echo "== $f"; python3 -I "$f.py" ../data ../outputs
 done
 mv -f ../outputs/*.pdf ../outputs/*.png ../figures/
+# The description of the result tables with the headline figures (outputs/results.json) and the guide
+# for programs and AI agents (llms.txt).
+echo "== make_guide"; python3 -I make_guide.py

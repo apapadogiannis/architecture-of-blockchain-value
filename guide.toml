@@ -1,0 +1,113 @@
+# The statements of llms.txt and of outputs/results.json that are specific to this package.
+# scripts/make_guide.py combines them with CITATION.cff and the stored result tables. No result of
+# the article is written here: every headline figure names the table cell it is read from.
+
+ssrn = "10.2139/ssrn.5401302"
+data_as_of = "The article uses no dataset. Its tables were transcribed in 2026."
+units = "Values are in the article's normalised units, with the value of one capability set to one in the figures; shares and ratios are plain numbers. Nothing here is in dollars."
+describe_as = "Papadogiannis (2026), \"The architecture of blockchain value: capabilities, pillars, and growth dynamics\", Frontiers in Blockchain 9, with its replication package."
+what = "Code and stored results of a theory article on what a blockchain can deliver (its capabilities) and how five architectural pillars decide which capabilities are feasible. It holds the model as code, the numbers stated in the article, the series behind its two quantitative figures, and its tables of three paradigms in machine-readable form. The article estimates nothing and uses no dataset. It is open access and is included in paper/."
+third_party = "There are no third-party data. The files in data/ are Tables 2 to 6 of the article, transcribed by hand; the article and those tables are under CC BY, the licence of Frontiers in Blockchain."
+results_file = "a `headline` list with a few of the article's stated numbers, each with the table cell it comes from, and `tables`, a description of the stored result tables and their columns. The numbers themselves are in the CSV files."
+
+coverage = [
+  "The numbers stated in Section 3: the worked example of footnote 2, the closed form of Equation (14) checked against the general sum of Equation (7), and the limiting ratio of the Corollary.",
+  "Figure 5: value against the number of capabilities, from 1 to 50, for the three paradigms.",
+  "Figure 8: Sarnoff, Metcalfe and Reed scaling for 1 to 20 users.",
+  "Tables 2 to 6: the three paradigms described along the five pillars, as one JSON file (outputs/paradigms.json).",
+  "One extension that is not in the article: the same total value split unequally among capabilities, which is the table behind a panel of the interactive page.",
+]
+adds = [
+  "The article's value equation as a small library (blockchain_value.py), so that the stated numbers follow from code and the closed form is checked against the general sum.",
+  "The paradigm tables in machine-readable form, with the table each entry comes from.",
+  "An interactive page (docs/index.html) in which the number of capabilities, the complementarity and the number of users can be moved; a test checks that the page computes the same numbers as the code.",
+]
+files = [
+  "outputs/paradigms.json: keys `pillars` and `paradigms`; under each paradigm and pillar, the entries of the article's table and its `source`.",
+  "blockchain_value.py: the model.",
+  "docs/index.html: the interactive page, also at https://apapadogiannis.github.io/architecture-of-blockchain-value/",
+  "paper/: the published article (open access, CC BY).",
+]
+read = [
+  "Everything here is theory. The numbers are consequences of the article's equations at stated parameter values; none is an estimate of the value of any network.",
+  "The complementarity values 0.5 and 0.75 are stylised parameters chosen for illustration, as the article says.",
+  "Values are normalised and have no currency.",
+  "`ext_unequal_values.csv` is an extension of this package and is not a result of the article.",
+  "In `text_numbers.csv` each quantity appears with the equation or footnote it belongs to in the column `where`.",
+]
+not_for = [
+  "A valuation of Bitcoin, Ethereum or any other network.",
+  "Evidence that networks follow Metcalfe's or Reed's law. The article states the laws; it does not test them.",
+  "An empirical classification of projects. The paradigms are the article's taxonomy, with examples.",
+]
+
+[[headline]]
+what = "Value of a multi-capability network with 50 capabilities relative to one capability (complementarity 0.5)"
+file = "text_numbers.csv"
+row = { quantity = "fig5_V_multi_K50" }
+column = "value"
+unit = "(normalised units)"
+where = "Figure 5, Equation (18)"
+
+[[headline]]
+what = "The same for a meta-capability network (complementarity 0.75)"
+file = "text_numbers.csv"
+row = { quantity = "fig5_V_meta_K50" }
+column = "value"
+unit = "(normalised units)"
+where = "Figure 5, Equation (19)"
+
+[[headline]]
+what = "Share of that value that comes from complementarities between capabilities, multi-capability case"
+file = "text_numbers.csv"
+row = { quantity = "fig5_share_from_complementarity_multi_K50" }
+column = "value"
+scale = 100
+decimals = 1
+unit = "per cent"
+where = "Equation (14)"
+
+[[headline]]
+what = "Limit of the ratio of meta- to multi-capability value as capabilities grow"
+file = "text_numbers.csv"
+row = { quantity = "corollary_limit_lambda1" }
+column = "value"
+unit = "(a ratio)"
+where = "Corollary"
+
+[[table]]
+file = "text_numbers.csv"
+what = "Every number stated in Section 3 of the article."
+[table.columns]
+quantity = "name of the quantity"
+where = "the equation, footnote or figure it belongs to"
+value = "its value"
+
+[[table]]
+file = "fig5_capability_scaling.csv"
+what = "Figure 5: value against the number of capabilities."
+[table.columns]
+K = "number of capabilities"
+V_single = "value of a single-capability network"
+"V_multi_eta_0.5" = "value of a multi-capability network with complementarity 0.5"
+"V_meta_eta_0.75" = "value of a meta-capability network with complementarity 0.75"
+
+[[table]]
+file = "fig8_scaling_laws.csv"
+what = "Figure 8: three laws of how value grows with users."
+[table.columns]
+u = "number of users"
+V_sarnoff = "value proportional to u"
+V_metcalfe = "value proportional to u squared"
+V_reed = "value proportional to 2 to the power u"
+
+[[table]]
+file = "ext_unequal_values.csv"
+what = "Not in the article: Equation (7) with the same total value split unequally among capabilities."
+[table.columns]
+K = "number of capabilities"
+top_share = "share of the total stand-alone value given to the largest capability; the others share the rest equally"
+direct_value = "sum of the stand-alone values"
+pair_bonus = "value added by complementarities between pairs"
+V = "total value"
+pair_bonus_if_equal = "the pair bonus if the same total were split equally"

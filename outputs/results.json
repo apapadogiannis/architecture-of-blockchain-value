@@ -1,0 +1,138 @@
+{
+  "package": {
+    "title": "The architecture of blockchain value: capabilities, pillars, and growth dynamics",
+    "author": {
+      "name": "Agisilaos Papadogiannis",
+      "orcid": "https://orcid.org/0009-0002-7753-7052",
+      "url": "https://github.com/apapadogiannis"
+    },
+    "status": "published article",
+    "article": {
+      "journal": "Frontiers in Blockchain",
+      "volume": 9,
+      "article_number": "1747512",
+      "year": 2026,
+      "doi": "https://doi.org/10.3389/fbloc.2026.1747512"
+    },
+    "preprint": "https://doi.org/10.2139/ssrn.5401302",
+    "repository": "https://github.com/apapadogiannis/architecture-of-blockchain-value",
+    "archive": "https://doi.org/10.5281/zenodo.24404059",
+    "version": "1.1.0",
+    "released": "2026-11-21",
+    "data_as_of": "The article uses no dataset. Its tables were transcribed in 2026.",
+    "units": "Values are in the article's normalised units, with the value of one capability set to one in the figures; shares and ratios are plain numbers. Nothing here is in dollars.",
+    "licence": {
+      "results": "CC-BY-4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "condition": "Reuse of the results is allowed with credit to the paper.",
+      "code": "MIT",
+      "third_party_data": "There are no third-party data. The files in data/ are Tables 2 to 6 of the article, transcribed by hand; the article and those tables are under CC BY, the licence of Frontiers in Blockchain."
+    },
+    "cite_as": "Papadogiannis, A. (2026). The architecture of blockchain value: capabilities, pillars, and growth dynamics. Frontiers in Blockchain, 9, 1747512. https://doi.org/10.3389/fbloc.2026.1747512",
+    "cite_package": "Papadogiannis, A. (2026). The architecture of blockchain value: capabilities, pillars, and growth dynamics. Replication package, version 1.1.0. Zenodo. https://doi.org/10.5281/zenodo.24404059",
+    "describe_as": "Papadogiannis (2026), \"The architecture of blockchain value: capabilities, pillars, and growth dynamics\", Frontiers in Blockchain 9, with its replication package.",
+    "guide": "llms.txt"
+  },
+  "headline": [
+    {
+      "what": "Value of a multi-capability network with 50 capabilities relative to one capability (complementarity 0.5)",
+      "value": 662.5,
+      "unit": "(normalised units)",
+      "where": "Figure 5, Equation (18)",
+      "source": {
+        "file": "outputs/text_numbers.csv",
+        "row": {
+          "quantity": "fig5_V_multi_K50"
+        },
+        "column": "value"
+      }
+    },
+    {
+      "what": "The same for a meta-capability network (complementarity 0.75)",
+      "value": 968.75,
+      "unit": "(normalised units)",
+      "where": "Figure 5, Equation (19)",
+      "source": {
+        "file": "outputs/text_numbers.csv",
+        "row": {
+          "quantity": "fig5_V_meta_K50"
+        },
+        "column": "value"
+      }
+    },
+    {
+      "what": "Share of that value that comes from complementarities between capabilities, multi-capability case",
+      "value": 92.5,
+      "unit": "per cent",
+      "where": "Equation (14)",
+      "source": {
+        "file": "outputs/text_numbers.csv",
+        "row": {
+          "quantity": "fig5_share_from_complementarity_multi_K50"
+        },
+        "column": "value",
+        "multiplied_by": 100
+      }
+    },
+    {
+      "what": "Limit of the ratio of meta- to multi-capability value as capabilities grow",
+      "value": 1.5,
+      "unit": "(a ratio)",
+      "where": "Corollary",
+      "source": {
+        "file": "outputs/text_numbers.csv",
+        "row": {
+          "quantity": "corollary_limit_lambda1"
+        },
+        "column": "value"
+      }
+    }
+  ],
+  "tables": [
+    {
+      "file": "outputs/text_numbers.csv",
+      "what": "Every number stated in Section 3 of the article.",
+      "rows": 26,
+      "columns": {
+        "quantity": "name of the quantity",
+        "where": "the equation, footnote or figure it belongs to",
+        "value": "its value"
+      }
+    },
+    {
+      "file": "outputs/fig5_capability_scaling.csv",
+      "what": "Figure 5: value against the number of capabilities.",
+      "rows": 50,
+      "columns": {
+        "K": "number of capabilities",
+        "V_single": "value of a single-capability network",
+        "V_multi_eta_0.5": "value of a multi-capability network with complementarity 0.5",
+        "V_meta_eta_0.75": "value of a meta-capability network with complementarity 0.75"
+      }
+    },
+    {
+      "file": "outputs/fig8_scaling_laws.csv",
+      "what": "Figure 8: three laws of how value grows with users.",
+      "rows": 20,
+      "columns": {
+        "u": "number of users",
+        "V_sarnoff": "value proportional to u",
+        "V_metcalfe": "value proportional to u squared",
+        "V_reed": "value proportional to 2 to the power u"
+      }
+    },
+    {
+      "file": "outputs/ext_unequal_values.csv",
+      "what": "Not in the article: Equation (7) with the same total value split unequally among capabilities.",
+      "rows": 114,
+      "columns": {
+        "K": "number of capabilities",
+        "top_share": "share of the total stand-alone value given to the largest capability; the others share the rest equally",
+        "direct_value": "sum of the stand-alone values",
+        "pair_bonus": "value added by complementarities between pairs",
+        "V": "total value",
+        "pair_bonus_if_equal": "the pair bonus if the same total were split equally"
+      }
+    }
+  ]
+}
